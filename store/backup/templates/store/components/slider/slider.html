@@ -1,0 +1,67 @@
+{% load static %}
+<div id="mainPageCrousel" class="carousel slide tw-mt-4" data-ride="carousel">
+  <!--Indicators-->
+  <ol class="carousel-indicators">
+    {% for i in sliderCount_pc %}
+        {% if forloop.first %}
+            <li data-target="#mainPageCrousel" data-slide-to={{forloop.counter0}} class="active Indicator_pc"></li>
+        {% else %}
+            <li data-target="#mainPageCrousel" data-slide-to={{forloop.counter0}} class="Indicator_pc"></li>
+        {% endif %}
+    {% endfor %}
+    {% for i in sliderCount_mob %}
+        {% if forloop.first %}
+            <li data-target="#mainPageCrousel" data-slide-to={{forloop.counter0}} class="active Indicator_mob"></li>
+        {% else %}
+            <li data-target="#mainPageCrousel" data-slide-to={{forloop.counter0}} class="Indicator_mob"></li>
+        {% endif %}
+    {% endfor %}
+  </ol>
+  <!--/.Indicators-->
+  <!--Slides-->
+  <div class="carousel-inner" role="listbox">
+    {% comment %} PC SLIDES {% endcomment %}
+    {% for slide in slides_pc %}
+        {% if forloop.first %}
+            <div class="carousel-item active slides_pc">
+                <a href="{{slide.GotoLink}}" target="_blank" rel="noopener noreferrer">
+                    <img class="d-block w-100" src={{slide.Image.url}} alt="First slide">
+                </a>
+            </div>
+        {% else %}
+            <div class="carousel-item slides_pc">
+                <a href="{{slide.GotoLink}}" target="_blank" rel="noopener noreferrer">
+                    <img class="d-block w-100" src={{slide.Image.url}} alt="First slide">
+                </a>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+  {% comment %} MOB SLIDES {% endcomment %}
+  {% for slide in slides_mob %}
+      {% if forloop.first %}
+          <div class="carousel-item active slides_mob">
+            <a href="{{slide.GotoLink}}" target="_blank" rel="noopener noreferrer">
+                <img class="d-block w-100" src={{slide.Image.url}} alt="First slide">
+            </a>
+          </div>
+      {% else %}
+          <div class="carousel-item slides_mob" >
+            <a href="{{slide.GotoLink}}" target="_blank" rel="noopener noreferrer">
+                <img class="d-block w-100" src={{slide.Image.url}} alt="First slide">
+            </a>
+          </div>
+      {% endif %}
+  {% endfor %}
+
+  </div>
+  <!--/.Slides-->
+  <!--Controls-->
+  <a class="carousel-control-prev tw-cursor-default" href="#mainPageCrousel" role="button" data-slide="prev">
+    <i class="fas fa-angle-left fa-2x tw-text-blue-300"></i>
+  </a>
+  <a class="carousel-control-next tw-cursor-default" href="#mainPageCrousel" role="button" data-slide="next">
+    <i class="fas fa-angle-right fa-2x tw-text-blue-300"></i>
+  </a>
+  <!--/.Controls-->
+</div>

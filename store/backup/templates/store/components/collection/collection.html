@@ -1,0 +1,16 @@
+{% for collection in all_collection %}
+    <div class="tw-flex tw-flex-col tw-content-evenly md:py-3 py-2 md:tw-px-2 tw-px-1 tw-shadow tw-rounded-md collection_container">
+        <div class="tw-flex tw-px-2 tw-items-center tw-justify-between tw-mb-3">
+            <h3 class='tw-font-medium md:tw-text-xl tw-text-base tw-text-gray-700 tw-capitalize montserrat'>{{collection.collection_name.1}}</h3>
+            <a href="{% url 'handle_product_search' %}?for=collection&col_id={{collection.collection_name.0}}" class="btn btn-success tw-text-white tw-px-2 tw-py-1">VIEW ALL</a>
+        </div>
+        <div class="tw-grid tw-grid-cols-2 tw-overflow-y-auto tw-py-4 md:tw-gap-3 tw-gap-1">
+            {% for item in collection.collection_items %}
+                {% include './collectionCard.html' with product=item %}
+            {% endfor %}
+        </div>
+        <div class="p-2 tw-bg-white">
+            <p class="tw-font-normal tw-text-gray-600 tw-mx-auto tw-text-justify">{{collection.collection_name.2}}</p>
+        </div>
+    </div>
+{% endfor %}

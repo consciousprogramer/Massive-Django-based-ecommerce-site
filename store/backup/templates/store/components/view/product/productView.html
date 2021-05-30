@@ -1,0 +1,85 @@
+{% extends '../../../base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<link rel="stylesheet" href={% static 'store/splide/dist/css/splide.min.css' %}>
+<link rel="stylesheet" href={% static 'store/lightgallery/dist/css/lightgallery.min.css' %}>
+<link rel="stylesheet" href={% static 'store/css/productView.css' %}>
+{% comment %} <link rel="stylesheet" href={% static 'store/Magnifier/magnifier.css' %}> {% endcomment %}
+{% endblock css %}
+
+{% block body %}
+    {% include '../../navbar/navbar.html' %}
+    {% include '../../../messages.html' %}
+    <!-- Button trigger modal-->
+<button type="button" class="btn btn-primary tw-hidden" id='tr_cart_modal' data-toggle="modal" data-target="#added_to_cart">Launch modal</button>
+<div class="modal fade right" id="added_to_cart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-success" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading">Added Product In Your Cart!
+        </p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-3">
+            <p></p>
+            <p class="text-center"><i class="fas fa-shopping-cart fa-4x"></i></p>
+          </div>
+
+          <div class="col-9">
+            <p id='prod_name' class='tw-font-medium tw-mb-2'></p>
+            <p id='' class='tw-capitalize tw-text-sm tw-mt-2'>your product will be waiting for you in the cart.</p>
+          </div>
+        </div>
+      </div>
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a href="{% url 'viewcart' %}" class="btn btn-success tw-font-normal tw-text-base">Go to cart</a>
+        <a type="button" class="btn btn-outline-success waves-effect  tw-font-normal tw-text-base" data-dismiss="modal">Cancel</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+    <div class="tw-grid md:tw-grid-cols-5 tw-grid-cols-1 md:tw-m-2 tw-my-2 tw-px-2" id='product-container'>
+        <div class='md:tw-col-span-2 tw-col-span-1 tw-flex tw-flex-col tw-items-center tw-justify-center tw-content-center lg:min-h-80-screen md:tw-sticky md:tw-top-14'>
+            <div class="tw-w-full tw-h-full md:tw-h-auto md:tw-sticky md:tw-top-0 md:tw-mb-auto">
+                {% include './viewSlider.html' with product=product ptype=ptype In_cart=In_cart %}
+            </div>
+        </div>
+        <div class='md:tw-col-span-3'>
+            {% include './detailsView.html' with product=product ptype=ptype variant=variant variant_vals=variant_vals In_cart=In_cart%}
+        </div>
+    </div>
+    <div class="tw-mt-10" id='inject-box'>
+    </div>
+    <div class="tw-mt-10" id='recommend-box'>
+        
+    </div>
+{% endblock body %}
+
+{% block js %}
+    <script src={% static 'store/js/cartHandler.js' %}></script>
+    <script src= {% static 'store/splide/dist/js/splide.min.js' %}></script>
+    <script src={% static 'store/lightgallery/dist/js/lightgallery.min.js' %}></script>
+    <script src={% static 'store/lightgallery/demo/js/lg-zoom.min.js' %}></script>
+    <script src={% static 'store/lightgallery/demo/js/lg-thumbnail.min.js' %}></script>
+    <script src={% static 'store/lightgallery/demo/js/lg-fullscreen.min.js' %}></script>
+    {% comment %} <script src={% static 'store/Magnifier/demo/Event.js' %}></script> {% endcomment %}
+    {% comment %} <script src={% static 'store/Magnifier/Magnifier.js' %}></script> {% endcomment %}
+    {% comment %} <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.17/src/jquery.ez-plus.js"></script> {% endcomment %}
+    <script src={% static 'store/zoom/jquery.zoom.js' %}></script>
+    <script src={% static 'store/js/productView.js' %}></script>
+{% endblock js %}

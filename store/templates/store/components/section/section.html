@@ -1,0 +1,33 @@
+<div class="md:mx-4 mx-3 tw-rounded-lg tw-py-3 tw-border-gray-300 tw-border tw-mb-7 main_page_section" id='section_{{id}}'>
+    <div class='tw-flex tw-justify-between tw-items-center tw-px-4 tw-rounded tw-mx-4 tw-mb-4'>
+        <h3 class='md:tw-text-2xl tw-text-xl montserrat tw-capitalize tw-font-semibold'>
+            {{rowdata.rowName.1}}
+        </h3>
+        <a href="#" class="btn btn-success btn-sm px-2 py-1">VIEW ALL</a>
+    </div>
+    <div class="splide md:tw-mx-4 tw-mx-2 mg:tw-my-6 tw-my-4" id='section_slider_{{id}}'>
+        <div class="splide__slider">
+            <div class="splide__track">
+                <ul class="splide__list">
+                {% for item in rowdata.rowItems %}
+                    {% if item.0 == True %}
+                        {% comment %} if VARIANT {% endcomment %}
+                        <li class="splide__slide section_slide_1">
+                            <a href="{% url 'product_view' ptype='variable' p_id=item.3 v_id=item.2 %}" target='_blank'>
+                                {% include './sectionCard.html' with item=item %}
+                            </a>
+                        </li>
+                    {% else %}
+                        {% comment %} if PRODUCT {% endcomment %}
+                        <li class="splide__slide section_slide_1">
+                            <a href="{% url 'product_view' ptype='normal' p_id=item.2 %}" target='_blank'>
+                                {% include './sectionCard.html' with item=item %}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

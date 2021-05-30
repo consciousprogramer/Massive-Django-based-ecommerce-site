@@ -1,0 +1,61 @@
+{% load static %}
+<h1 class="tw-text-4xl md:tw-text-5xl tw-font-medium tw-mt-14 tw-mb-4 tw-capitalize tw-text-center tw-text-gray-700">
+    contact us
+</h1>
+
+<div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-0 tw-mx-6 tw-py-4 tw-mb-6">
+    <div class="tw-col-span-1 tw-px-3 md:tw-px-6 tw-relative">
+        <div class="tw-block">
+            <img src="{% static 'store/images/contact-us3.jpg' %}" class='tw-w-full tw-h-full tw-object-contain' alt="">
+        </div>
+    </div>
+    <div class="tw-col-span-1 tw-px-3 md:tw-px-6 tw-relative tw-py-4 tw-text-gray-700">
+        <form method='post' class="tw-flex tw-items-center tw-justify-center tw-py-6 tw-mt-0 tw-font-normal">
+            <div class="my-auto tw-mx-3 tw-flex-grow">
+                {% csrf_token %}
+                <div class="md-form md-outline mb-0 tw-flex-grow tw-flex-shrink-0">
+                    <input type="text" id="Name" name='Name' class="form-control validate" required>
+                    <label for="Name" data-error="Please fill the Name" data-success="Correct" class="">Your name or campany name</label>
+                </div>
+                <div class="md-form md-outline mb-0 tw-flex-grow tw-flex-shrink-0">
+                    <input type="text" id="PhoneNumber" name='PhoneNumber' class="form-control validate" required>
+                    <label for="PhoneNumber" data-error="Please fill the Name" data-success="Correct" class="">Phone/E-mail</label>
+                </div>
+                <div class="md-form md-outline mb-0 tw-flex-grow tw-flex-shrink-0">
+                    <input type="text" id="Subject" name='Subject' class="form-control validate" required>
+                    <label for="Subject" data-error="Please fill the Name" data-success="Correct" class="">Subject</label>
+                </div>
+                <div class="md-form md-outline mb-0 tw-flex-grow tw-flex-shrink-0">
+                    <input type="text" id="Message" name='Message' class="form-control validate" required>
+                    <label for="Message" data-error="Please fill the Name" data-success="Correct" class="">Your Message / Query</label>
+                </div>
+                <div class="tw-text-center tw-py-4">
+                    <button type="submit" class='tw-py-3 tw-px-5 tw-bg-yellow-400 tw-text-white tw-font-semibold tw-uppercase tw-rounded tw-shadow hover:tw-bg-yellow-500'> submit </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="tw-flex tw-items-end tw-justify-center tw-px-4 tw-py-6 tw-flex-wrap montserrat">
+    <div class="tw-flex tw-items-center tw-px-4 tw-flex-shrink tw-py-3 md:tw-mr-8 tw-mx-auto tw-text-gray-700">
+        <div class="tw-flex-shrink tw-my-auto">
+            <i class="fas fa-phone-square-alt fa-2x"></i>
+        </div>
+        <div class="tw-flex-shrink-0 tw-flex-grow tw-font-medium tw-pl-2 tw-my-auto">
+            <a href="tel:+6200001352">
+                6200001352
+            </a>
+        </div>
+    </div>
+    <div class="tw-flex tw-items-center tw-px-4 tw-flex-shrink tw-py-3 md:tw-ml-8 tw-mx-auto tw-text-gray-700">
+        <div class="tw-flex-shrink tw-my-auto">
+            <i class="fas fa-envelope fa-2x"></i>
+        </div>
+        <div class="tw-flex-shrink-0 tw-flex-grow tw-font-medium tw-pl-2 tw-my-auto">
+            <a href="mailto:Rohitkumar9133@gmail.com">
+                Rohitkumar9133@gmail.com
+            </a>
+        </div>
+    </div>
+</div>

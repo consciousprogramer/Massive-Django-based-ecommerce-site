@@ -1,0 +1,19 @@
+<div class="tw-flex tw-justify-center tw-items-center tw-flex-col tw-text-center tw-my-8 tw-border-gray-300 tw-border tw-border-l-0 tw-border-r-0">
+    <p class="tw-text-center tw-pt-2 tw-pb-8 tw-mx-2 montserrat tw-text-xl tw-font-semibold tw-text-gray-600">
+        View products by Brands
+    </p>
+
+    {% comment %} <div class="tw-flex tw-items-center tw-flex-nowrap tw-mx-2 tw-overflow-x-auto tw-w-full tw-py-4" > {% endcomment %}
+            <div class="splide tw-w-full tw-flex tw-items-center tw-justify-center" id='brand_slider'>
+                <div class="splide__track tw-my-auto tw-flex-grow-0">
+                    <ul class="splide__list ">
+                        {% for brand in brands %}
+                            <li class="splide__slide">
+                                {% include './brandCard.html' with brand=brand %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+</div>

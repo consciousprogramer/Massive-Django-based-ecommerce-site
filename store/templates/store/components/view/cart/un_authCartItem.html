@@ -1,0 +1,54 @@
+{% comment %} <a href={% if Item.Variant__Is_variant == True %}
+            {% url 'product_view' ptype='variable' p_id=Item.Variant__Product_id v_id=Item.Variant__id %}
+        {% else %}
+            {% url 'product_view' ptype='normal' p_id=Item.Variant__id %}
+        {% endif %} 
+    class="tw-grid tw-grid-cols-12 tw-gap-x-2 tw-p-2 lg:tw-mx-2 lg:mb-6 tw-mb-3 tw-mx-1 tw-border tw-border-gray-300 tw-shadow"> {% endcomment %}
+<div data-id="{{Item.1}}" data-cardtype="{% if Item.0 == True %}variable{% else %}normal{% endif %}" class="tw-grid tw-grid-cols-12 tw-gap-x-2 tw-p-2 lg:tw-mx-2 lg:mb-6 tw-mb-3 tw-mx-1 tw-border tw-border-gray-300 tw-shadow">
+    <div class='lg:tw-col-span-3 tw-col-span-4 tw-h-full'>
+        <div class='lg:tw-w-full lg:tw-h-44 md:tw-w-full md:tw-h-36 tw-w-full tw-h-28 tw-text-center tw-mb-auto'>
+            <img src="{{Item.4}}" alt="" class='tw-w-full tw-h-full tw-object-contain'>
+        </div>
+        <div class='tw-block tw-mt-auto tw-py-3'>
+            <input type="number" name="" id="input-{{counter}}" data-id="{{Item.1}}" data-cardtype="{% if Item.0 == True %}variable{% else %}normal{% endif %}" class='tw-w-full tw-font-normal md:tw-text-lg tw-text-base tw-h-7 tw-border-gray-300 tw-border tw-p-0.5 tw-text-center tw-border-b-0' placeholder='Item Quantity' value={{Item.9}} >
+            <div class="tw-flex tw-items-center">
+                <button data-action='plus' data-for='input-{{counter}}' class="tw-w-10 tw-h-10 tw-border tw-border-gray-300 tw-text-gray-600 tw-grid tw-place-items-center tw-flex-grow hover:tw-border-gray-500 hover:tw-text-gray-600 tw-cursor-pointer quant-btn tw-bg-transparent">
+                    <i class="fas fa-plus fa-lg" style='z-index:-1'></i>
+                </button>
+                <button data-action='minus' data-for='input-{{counter}}'  class="tw-w-10 tw-h-10 tw-border tw-border-gray-300 tw-text-gray-600 tw-grid tw-place-items-center tw-flex-grow hover:tw-border-gray-500 hover:tw-text-gray-600 tw-cursor-pointer quant-btn tw-bg-transparent">
+                    <i class="fas fa-minus fa-lg" style='z-index:-1'></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class='lg:tw-col-span-9 tw-col-span-8 tw-grid-rows-6'>
+        <div class="tw-w-full tw-row-span-6">
+        <h1 class="tw-text-gray-800 tw-font-medium md:tw-text-xl montserrat">{{Item.3|truncatewords:9}}</h1>
+        <hr class="tw-w-1/2 lg:tw-w-10/12 tw-mt-2 lg:tw-mt-3 tw-border-gray-300">
+        <div class="tw-flex tw-items-center tw-justify-start mt-2">
+            <p class="mr-2 tw-font-serif tw-text-xl tw-font-medium tw-text-gray-800 tw-my-auto">₹{{Item.5}}</p>
+            <p class="mx-2 tw-text-gray-500 tw-my-auto">₹<span class='tw-line-through'>{{Item.6}}</span></p>
+            <p class="mx-2 tw-text-green-500 tw-font-medium tw-my-auto">({{Item.7}}% off)</p>
+        </div>
+        {% if Item.0 == True %}
+            {% comment %} <p class="tw-underline tw-font-normal tw-capitalize tw-text-gray-500 mt-2">Variant Details :</p> {% endcomment %}
+            <div class="tw-mt-3 tw-flex tw-justify-items-start tw-items-center w-full tw-flex-wrap">
+                {% for attr in Item.8.attrRead %}
+                    <p class="tw-p-0.5 tw-border tw-border-gray-200 tw-font-normal tw-bg-gray-100 tw-text-sm tw-text-gray-600 tw-capitalize tw-mr-2 tw-mb-2 tw-flex-shrink-0 tw-flex-grow-0">{{attr}}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="tw-mt-3 tw-text-green-500 md:tw-font-normal tw-bg-green-50 tw-inline-block tw-p-1 hover:tw-bg-green-100 hover:tw-text-green-600 tw-border tw-border-green-200 tw-rounded-sm">
+            <span class="">Item Quantity</span>: {{Item.9}}
+        </div>
+        <br>
+        <p class="tw-text-left tw-font-normal tw-mt-2 tw-text-gray-500 md:tw-text-base tw-text-sm">
+                Added : {{Item.1}}
+        </p>
+        </div>
+        <div class='tw-flex tw-items-center tw-justify-center tw-gap-x-4 md:tw-mt-3'>
+            <button class="tw-flex-grow tw-flex-shrink-0 tw-py-2 tw-text-gray-700 tw-font-normal tw-text-center tw-border-gray-400 tw-border md:tw-text-base tw-text-sm hover:tw-bg-gray-100 hover:tw-border-gray-500 tw-transition tw-z-10">Save For Later</button>
+            <button data-item-id="{{Item.1}}" data-ptype="{% if Item.0 == True %}variable{% else %}normal{% endif %}" class="remove-btn tw-flex-grow tw-flex-shrink-0 tw-py-2 tw-text-gray-700 tw-font-normal tw-text-center tw-border-gray-400 tw-border md:tw-text-base tw-text-sm hover:tw-bg-gray-100 hover:tw-border-gray-500 tw-transition tw-z-10">Remove</button>
+        </div>
+    </div>
+</div>

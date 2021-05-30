@@ -1,0 +1,49 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href={% static 'store/splide/dist/css/splide.min.css' %}>
+    <link rel="stylesheet" href={% static 'store/css/index.css' %}>
+{% endblock %}
+
+{% block body %}
+
+    {% include './components/navbar/navbar.html' %}
+    {{topbar}}
+    {{slider}}
+
+    {% include './components/banner/banner.html' %}
+
+    {% include './components/section/productsTab.html' %}
+
+    <div class="tw-grid md:tw-grid-cols-2 tw-grid-cols-1 md:tw-px-3 tw-px-2 tw-py-4 md:tw-gap-4 tw-gap-2 tw-mx-2 md:tw-mx-8">
+        {{collection}}
+        {{collection}}
+    </div>
+    
+    {% for rowData in allRowdata %}
+        {% include './components/section/section.html' with rowdata=rowData id=forloop.counter %}
+    {% endfor %}
+
+    {% include './components/shopByBrand/brandSlider.html' with brands=brands %}
+
+    <div class='tw-mx-4 tw-py-6 tw-my-16'>
+        <h1 class="tw-font-medium tw-text-center tw-text-2xl tw-text-gray-700 text-capitalize tw-my-3 montserrat">For Bulk Purchase/Order or Other query, Please feel free to contact us </h1>
+        <div class="tw-text-center tw-py-4 tw-text-white hover:tw-text-white tw-mt-4">
+            <a type="submit" href="{% url 'contact' %}" class='tw-py-3 tw-px-5 tw-bg-yellow-400 tw-text-white hover:tw-text-white tw-font-semibold tw-uppercase tw-rounded tw-shadow hover:tw-bg-yellow-500 tw-transition-colors'> submit </a>
+        </div>
+    </div>
+    
+    {% include './components/footer/footer.html' %}
+
+{% endblock %}
+
+
+{% block beforejs %}
+    <script src={% static 'store/js/removeSlider.js' %}></script>
+{% endblock %}
+
+{% block js %}
+    <script src= {% static 'store/splide/dist/js/splide.min.js' %}></script>
+    <script src= {% static 'store/js/index.js' %}></script>
+{% endblock %}

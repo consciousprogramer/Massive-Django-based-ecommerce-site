@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href={% static 'store/mdb/css/bootstrap.min.css' %}>
+    <link rel="stylesheet" href={% static 'store/mdb/css/mdb.min.css' %}>
+    <link rel="stylesheet" href={% static 'store/Tailwind/compiled/tailwind.css' %}>
+    <style>
+        .montserrat{
+            font-family: 'Montserrat','sans-serif';
+        }
+    </style>
+    <script>
+        {% if request.user.is_authenticated %}
+            const userId = {{ request.user.id}}
+            const customerId = {{request.user.Customer.id}}
+            const userName = "{{ request.user.first_name}}"
+        {% else %}
+            const userId = null
+            const customerId = null
+            const userName = null
+        {% endif %}
+        const cartPageUrl = "{% url 'viewcart' %}"
+        let cart = null
+        let newCart = null
+        if (userId && customerId) {
+            // User is logged in
+            console.log('[user logged in]');
+        } else {
+            // user not logged in check lacalstoreage for any saved cart
+            console.log('[user not logged in]');
+            if (localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'))
+                newCart = false
+            } else {
+                // if no previous cart then, createone
+                cart = new Object()
+                newCart = true
+                cart.createdOn = new Date().getTime()
+                cart.cartItems = []
+                cart.prodList = []
+                cart.varList = []
+            }
+        }
+        console.log('base script completed')
+    </script>
+    {% block css %}{% endblock %}
+</head>
+<body>
+
+    {% block body %}{% endblock %}
+
+
+    {% block beforejs %}{% endblock %}
+    <script src={% static 'store/mdb/js/jquery.min.js' %} ></script>
+    {% comment %} <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script> {% endcomment %}
+    <script src={% static 'store/mdb/js/popper.min.js' %} ></script>
+    <script src={% static 'store/mdb/js/bootstrap.min.js' %} ></script>
+    <script src={% static 'store/mdb/js/mdb.min.js' %} ></script>
+    <script src={% static 'store/js/navbar.js' %}></script>
+    {% block js %}{% endblock %}
+    
+</body>
+</html>

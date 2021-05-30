@@ -1,0 +1,76 @@
+{% load widget_tweaks %}
+
+{% for hidden_field in form.hidden_fields %}
+  {{ hidden_field }}
+{% endfor %}
+
+{% if form.non_field_errors %}
+  <div class="alert alert-danger" role="alert">
+    {% for error in form.non_field_errors %}
+      {{ error }}
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% for field in form.visible_fields %}
+    {% if form.is_bound %}
+        {% comment %} handle NON-TRIVAL input types here {% endcomment %}
+        {% if field == form.AddressType or field == form.District or field == form.State %}
+            {% if field.errors %}
+                {{field.label_tag}}
+                {% render_field field class='form-control is-invalid' %}
+                {% for error in field.errors %}
+                    <div class="invalid-feedback">
+                        {{error}}
+                    </div>
+                {% endfor %}
+            {% else %}
+                {{field.label_tag}}
+                {% render_field field class='form-control is-valid' %}
+                <div class="valid-feedback">
+                    Correct!
+                </div>
+            {% endif %}
+        {% else %}
+        {% comment %} HANDLE TRIVAL INPUT TYPES HERE {% endcomment %}
+        <div class="md-form md-outline mb-0">
+            {% if field.errors %}
+                {% render_field field class='form-control is-invalid' %}
+                {% for error in field.errors %}
+                    <div class="invalid-feedback">
+                        {{error}}
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% render_field field class='form-control is-valid' %}
+                <div class="valid-feedback">
+                    Correct!
+                </div>
+            {% endif %}
+            {{field.label_tag}}
+        </div>
+        {% endif %}
+    {% else %}
+        {% if field == form.AddressType or field == form.District or field == form.State %}
+            <div class="tw-mt-4">
+                {{field.label_tag}}
+                {% render_field field class='form-control tw-text-gray-600 tw-font-light tw-mt-2' %}
+            </div>
+        {% elif field == form.Address %}
+            <div class="md-form md-outline mb-0">
+                {% render_field field class='form-control md-textarea' rows="3" %}
+                {{field.label_tag}}
+            </div>
+        {% else %}
+            <div class="md-form md-outline mb-0">
+                {% render_field field class='form-control' %}
+                {{field.label_tag}}
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% comment %} ALWAYS <RENDER></RENDER> {% endcomment %}
+    {% if field.help_text %}
+        <small class="tw-pl-2 form-text tw-text-gray-400">{{ field.help_text }}</small>
+    {% endif %}
+{% endfor %}

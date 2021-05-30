@@ -1,0 +1,60 @@
+{% load static %}
+<div class="tw-self-stretch tw-flex tw-justify-between tw-items-center tw-p-2 tw-rounded-md tw-shadow hover:tw-shadow-lg tw-bg-white md:hover:tw-border-gray-300 md:tw-border-white md:tw-border search-card">
+    <a href={% if prod == False %}{% url 'product_view' ptype='variable' p_id=p_id v_id=i_id %}{% else %}{% url 'product_view' ptype='normal' p_id=i_id %}{% endif %} class='tw-inline-block lg:tw-w-40 lg:tw-h-48 md:tw-w-36 md:tw-h-40 tw-w-32 tw-h-36 tw-text-center tw-mb-auto' target="_blank">
+        <img src="{{Thumbnail}}" alt="" class='tw-w-full tw-h-full tw-object-contain'>
+    </a>
+    <div class="tw-flex tw-justify-start tw-items-center tw-flex-grow tw-min-h-full tw-pl-3 tw-relative">
+        <a href={% if prod == False %}{% url 'product_view' ptype='variable' p_id=p_id v_id=i_id %}{% else %}{% url 'product_view' ptype='normal' p_id=i_id %}{% endif %} class='tw-block tw-relative tw-flex-grow tw-h-full tw-z-0' target="_blank">
+            <h1 class="tw-font-medium tw-text-left montserrat tw-text-sm lg:tw-text-base tw-mr-auto">{{Name}}</h1>
+            <hr class='tw-w-3/4 tw-mr-auto tw-mt-2'>
+            <div class="tw-flex tw-justify-start tw-items-center tw-mr-auto tw-my-1">
+                <p class='tw-font-medium tw-font-serif tw-text-xl tw-mr-3 tw-my-auto'>₹{{price}}</p>
+                <p class='tw-line-through tw-text-gray-500 tw-text-sm tw-mr-3 tw-my-auto'>₹{{c_price}}</p>
+                <p class="tw-text-sm tw-text-green-500 tw-mr-3 tw-my-auto">({{Discount}}% off)</p>
+            </div>
+            {% if prod == False %}
+                {% comment %} <p class="tw-underline tw-font-normal tw-capitalize tw-text-gray-500 mt-2">Variant Details :</p> {% endcomment %}
+                <div class="tw-mt-3 tw-flex tw-justify-items-start tw-items-center w-full tw-flex-wrap">
+                    {% for attr in attr.attrRead %}
+                        <p class="tw-p-0.5 tw-border tw-border-gray-200 tw-font-normal tw-bg-gray-100 tw-text-sm tw-text-gray-600 tw-capitalize tw-mr-2 tw-mb-2 tw-flex-shrink-0 tw-flex-grow-0">{{attr}}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class='tw-mr-auto highlight-container tw-overflow-y-auto md:tw-mb-0 tw-mb-3'>
+                <p class='tw-font-normal tw-text-xs md:tw-text-sm'>Highlights</p>
+                {% for Highlight in Highlights %}
+                    {% if forloop.counter < 4 %}
+                        <p class='tw-text-gray-600 md:tw-text-sm tw-text-xs tw-pr-2 tw-rounded tw-text-left my-2 tw-leading-3'>
+                            <i class="fas fa-caret-right tw-text-gray-400 tw-mr-3"></i>{{Highlight}}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            </a>
+        <div class="tw-absolute tw-bottom-0 tw-right-0 tw-z-10">
+            <div class="tw-inline-flex tw-items-center tw-justify-between tw-relative tw-top-2">
+                {% if prod == True %}
+                    {% if i_id in request.session.prodList %}
+                            <button data-item-id="{{i_id}}" data-action='view_cart' data-ptype="noraml" class="cart_btn btn orange tw-inline-block tw-py-0.5 tw-px-1 tw-shadow-none tw-mx-0 tw-z-50 tw-text-white hover:tw-text-white">
+                                <i class="fas fa-shopping-cart" style='z-index:-10;'></i> VIEW CART
+                            </button>
+                    {% else %}
+                            <button data-item-id="{{i_id}}" data-action='add' data-ptype="normal" class="cart_btn btn orange tw-inline-block tw-py-0.5 tw-px-1 tw-shadow-none tw-mx-0 tw-z-50 tw-text-white hover:tw-text-white">
+                                <i class="fas fa-shopping-cart" style='z-index:-10;'></i> ADD TO CART
+                            </button>
+                    {% endif %}
+                {% else %}
+                    {% if i_id in request.session.varList %}
+                            <button data-item-id="{{i_id}}" data-action='view_cart' data-ptype="variable" class="cart_btn btn orange tw-inline-block tw-py-0.5 tw-px-1 tw-shadow-none tw-mx-0 tw-z-50 tw-text-white hover:tw-text-white">
+                                <i class="fas fa-shopping-cart" style='z-index:-10;'></i> VIEW CART
+                            </button>
+                    {% else %}
+                            <button data-item-id="{{i_id}}" data-action='add' data-ptype="variable" class="cart_btn btn orange tw-inline-block tw-py-0.5 tw-px-1 tw-shadow-none tw-mx-0 tw-z-50 tw-text-white hover:tw-text-white">
+                                <i class="fas fa-shopping-cart" style='z-index:-10;'></i> ADD TO CART
+                            </button>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

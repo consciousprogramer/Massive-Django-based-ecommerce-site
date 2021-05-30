@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    {% csrf_token %}
+    <script>
+        debugger
+        const handle_cart_convert = "{% url 'handle_cart_convert' %}"
+        let cart = null
+        let newCart = null
+        const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'))
+        } else {
+            // if no previous cart then, createone
+            cart = new Object()
+            newCart = true
+            cart.createdOn = new Date().getTime()
+            cart.cartItems = []
+            cart.prodList = []
+            cart.varList = []
+        }
+        fetch(handle_cart_convert,{
+                method:"POST",
+                mode:'cors',
+                cache:'no-cache',
+                headers:{
+                    'Content-Type':'application/json',
+                    'X-CSRFToken':csrftoken,
+                },
+                body:JSON.stringify({'cart':cart.cartItems})
+            }).then(response => {
+                if(response.ok){
+                    window.location.search = '?with_cart=True'
+                }
+            })
+              .catch(error => alert(error.message))
+    </script>
+</body>
+</html>

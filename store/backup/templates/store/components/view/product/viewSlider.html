@@ -1,0 +1,116 @@
+{% load static %} 
+
+{% if ptype == 'normal' %}
+
+{% comment %} primary slider {% endcomment %}
+
+<div class="tw-w-full tw-h-full tw-relative tw-p-2 tw-shadow-lg">
+{% if In_cart == True %}
+    <div id='heart-cart' data-action='view_cart' class='tw-bg-red-100 tw-text-red-500 tw-flex tw-p-2 tw-border tw-border-yellow-400 tw-rounded-sm tw-shadow-xl tw-absolute md:tw-top-6 md:tw-right-6 tw-top-4 tw-right-4 tw-z-10'>
+        <i class="fas fa-heart"></i>
+    </div>
+{% elif In_cart == False %}
+    <div id='heart-cart' data-action='add' class='tw-bg-red-100 tw-text-red-300 hover:tw-text-red-500 tw-flex tw-p-2 tw-border tw-border-gray-300 hover:tw-border-yellow-400 tw-rounded-sm tw-shadow-xl tw-absolute md:tw-top-6 md:tw-right-6 tw-top-4 tw-right-4 tw-z-10 tw-cursor-pointer'>
+        <i class="fas fa-heart"></i>
+    </div>
+{% endif %}
+<div class="splide tw-mx-auto tw-border-gray-300 tw-border-solid tw-border" id="primary-slider">
+    <div class="splide__track">
+    <ul class="splide__list" id="lightgallery">
+        {% comment %} MAIN IMAGES {% endcomment %}
+        <li class="splide__slide">
+            <a href="{{product.Main_image.url}}" class="lg_item" id='zoom_0' data-zoom-image='{{product.Main_image.url}}' data-fetched='false'>
+                <img src="{{product.Thumb_path}}" class='primary_images'  alt="" />
+            </a>
+        </li>
+        {% comment %} Loop ovel all the images of the product {% endcomment %}
+        {% for image in product.Its_images.all %}
+            <li class="splide__slide">
+                <a href="{{image.Main_image.url}}" class="lg_item" id='zoom_{{forloop.counter1}}' data-zoom-image='{{image.Main_image.url}}' data-fetched='false'>
+                    <img src="{{image.Thumb_path}}" class='primary_images'  alt="" />
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
+</div>
+
+{% comment %} secondary slider {% endcomment %}
+<div class="splide tw-mx-auto tw-bg-gray-200 tw-rounded tw-p-2" id="secondary-slider">
+    <div class="splide__track">
+    <ul class="splide__list">
+        <li class="splide__slide thumbslides tw-bg-white tw-rounded tw-shadow-sm">
+            <img src="{{product.Thumb_path}}" alt="" />
+        </li>
+        {% for image in product.Its_images.all %}
+        <li class="splide__slide thumbslides tw-bg-white tw-rounded tw-shadow-sm">
+            <img src="{{image.Thumb_path}}" alt="" />
+        </li>
+        {% endfor %}
+    </ul>
+    </div>
+</div>
+</div>
+
+
+
+{% elif ptype == 'variable' %}
+
+{% comment %}-------------------------------------- primary slider ------------------------------------------------ {% endcomment %}
+<div class="tw-w-full tw-h-full tw-relative tw-p-2 tw-shadow-lg">
+{% if In_cart == True %}
+    <div id='heart-cart' data-action='view_cart' class='tw-bg-red-100 tw-text-red-500 tw-flex tw-p-2 tw-border tw-border-yellow-400 tw-rounded-sm tw-shadow-xl tw-absolute md:tw-top-6 md:tw-right-6 tw-top-4 tw-right-4 tw-z-10'>
+        <i class="fas fa-heart"></i>
+    </div>
+{% elif In_cart == False %}
+    <div id='heart-cart' data-action='add' class='tw-bg-red-100 tw-text-red-300 hover:tw-text-red-500 tw-flex tw-p-2 tw-border tw-border-gray-300 hover:tw-border-yellow-400 tw-rounded-sm tw-shadow-xl tw-absolute md:tw-top-6 md:tw-right-6 tw-top-4 tw-right-4 tw-z-10 tw-cursor-pointer'>
+        <i class="fas fa-heart"></i>
+    </div>
+{% endif %}
+<div class="splide tw-mx-auto tw-border-gray-300 tw-border-solid tw-border" id="primary-slider">
+    <div class="splide__track">
+    <ul class="splide__list" id="lightgallery">
+        {% comment %} MAIN IMAGES {% endcomment %}
+        <li class="splide__slide">
+            <a href="{{product.Main_image.url}}" class="lg_item" id='zoom_z1' data-zoom-image='{{product.Main_image.url}}' data-fetched='false'>
+                <img src="{{product.Thumb_path}}" class='primary_images'  alt="" />
+            </a>
+        </li>
+        <li class="splide__slide">
+            <a href="{{variant.Main_image.url}}" class="lg_item" id='zoom_z2' data-zoom-image='{{variant.Main_image.url}}' data-fetched='false'>
+                <img src="{{variant.Thumb_path}}" class='primary_images'  alt="" />
+            </a>
+        </li>
+        {% comment %} Loop ovel all the images of the product {% endcomment %}
+        {% for image in variant.Images.all %}
+            <li class="splide__slide">
+                <a href="{{image.Main_image.url}}" class="lg_item" id='zoom_{{forloop.counter0}}' data-zoom-image='{{image.Main_image.url}}' data-fetched='false'>
+                    <img src="{{image.Thumb_path}}" class='primary_images'  alt="" />
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
+</div>
+
+{% comment %} secondary slider {% endcomment %}
+<div class="splide tw-mx-auto tw-bg-gray-200 tw-rounded tw-p-2" id="secondary-slider">
+    <div class="splide__track">
+    <ul class="splide__list">
+        <li class="splide__slide thumbslides tw-bg-white tw-rounded tw-shadow-sm">
+            <img src="{{product.Thumb_path}}" alt="" />
+        </li>
+        <li class="splide__slide thumbslides tw-bg-white tw-rounded tw-shadow-sm">
+            <img src="{{variant.Thumb_path}}" alt="" />
+        </li>
+        {% for image in variant.Images.all %}
+            <li class="splide__slide">
+                <img src="{{image.Thumb_path}}" class='primary_images'  alt="" />
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
+</div>
+</div>
+
+{% endif %}

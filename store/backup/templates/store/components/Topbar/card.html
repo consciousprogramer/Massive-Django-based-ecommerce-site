@@ -1,0 +1,7 @@
+{% load static %}
+<a href="{{topbar_image.GotoUrl}}" target='_blank' class='topbar-image-container tw-rounded-md tw-flex-shrink-0 tw-mx-6 md:tw-mx-14 tw-text-gray-500 hover:tw-text-green-500 tw-cursor-pointer'>
+    <img src={{topbar_image.Image.url}} alt="{{topbar_image.Name}}" class='topbar-image'>
+    <div class="tw-relative topbar-rel-pos">
+        <p class='topbar-abs-card-title tw-block tw-mt-1 tw-mx-auto tw-text-sm md:tw-text-base tw-font-semibold tw-whitespace-nowrap montserrat'>{{topbar_image.Name}}</p>
+    </div>
+</a>

@@ -1,0 +1,12 @@
+{% comment %} <div class="tw-relative tw-mx-4 tw-my-8 tw-rounded-lg z-depth-1 tw-opacity-80 tw-overflow-hidden" style="background-position: center;background-size: cover;background-image:url({{Banner.BackgroundImage.url}});min-height:400px"> {% endcomment %}
+<div class="tw-relative tw-mx-4 tw-my-8 tw-rounded-lg z-depth-1 tw-opacity-80 tw-overflow-hidden" style="background-position: center;background-size: cover;background-image:url({{Banner.BackgroundImage.url}});min-height:400px">
+    <div class="tw-z-10 tw-px-5 tw-absolute tw-top-0 tw-left-0 tw-bottom-0 tw-right-0 tw-flex tw-flex-col tw-items-center tw-justify-center tw-opacity-100">
+        <h1 class="tw-font-semibold tw-text-3xl my-3 tw-capitalize tw-text-center montserrat">{{Banner.Name}}</h1>
+        <p class="tw-font-normal tw-text-gray-500 tw-my-3 tw-capitalize tw-text-lg tw-text-center">{{Banner.Description}}</p>
+        <div class="tw-mt-8">
+            <a href="{{Banner.Link}}" target="_blank" class='tw-uppercase tw-py-3 tw-px-5 tw-text-white tw-font-medium tw-rounded hover:tw-shadow tw-bg-indigo-500 hover:tw-bg-indigo-600 hover:tw-text-white' >
+                GET NOW
+            </a>
+        </div>
+    </div>
+</div>

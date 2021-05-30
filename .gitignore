@@ -1,0 +1,15 @@
+node_modules/
+/node_modules
+**/node_modules
+__pycache__/
+/__pycache__
+**/__pycache__
+db.sqlite3
+venv/
+/venv
+**/venv
+*.pyc
+/secret.json
+secret.js
+/assets
+assets/

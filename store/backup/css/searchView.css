@@ -1,0 +1,13 @@
+body,
+html {
+    overflow-x: hidden;
+}
+
+.highlight-container {
+    height: auto;
+    max-height: 112px;
+}
+
+.montserrat {
+    font-family: 'Montserrat';
+}

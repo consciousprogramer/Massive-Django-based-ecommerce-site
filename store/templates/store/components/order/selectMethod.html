@@ -1,0 +1,79 @@
+    {% extends '../../base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'store/css/orderPage.css' %}">
+{% endblock css %}
+
+{% block body %}
+    {% include '../navbar/navbar.html' %}
+    <div class='tw-block tw-my-4 md:tw-mx-10 tw-border-gray-200 tw-border tw-rounded-md'>
+        <div class="tw-grid tw-grid-cols-3 md:tw-gap-x-6 tw-gap-y-4 tw-gap-x-4">
+            <div class='md:tw-col-span-2 tw-col-span-3 md:tw-order-1 tw-order-2'>
+                <div class="tw-text-left tw-pl-4 tw-mt-4 tw-mb-8"><a href={% url 'viewcart' %} class="orange lighten-1 tw-py-2 tw-px-4 tw-rounded tw-uppercase tw-text-white tw-font-normal hover:tw-text-white">back to cart</a></div>
+                <h1 class="tw-flex tw-justify-start tw-items-center tw-pl-4 tw-capitalize tw-font-medium md:tw-font-semibold montserrat tw-text-2xl tw-py-3">Choose Payment Method</h1>
+                
+                <form method="post" class=' tw-pl-4 tw-flex tw-flex-col tw-items-center tw-mt-4 tw-font-normal'>
+                    {% for method in allMethods %}
+                        <div class="form-check tw-flex-grow tw-flex-shrink-0 tw-py-2 tw-shadow tw-my-2 tw-mr-auto tw-w-full">
+                            <input {% if method.Is_active == False %}disabled{% endif %} type="radio" class="form-check-input method-option" id="{{method.CodeWord}}" name="payment-options">
+                            <label class="form-check-label tw-capitalize tw-pr-8" for="{{method.CodeWord}}">{{method.Name}}</label>
+                        </div>
+                        <div class="tw-w-full px-3 inject-box tw-hidden" data-for=id="{{method.CodeWord}}">
+                            
+                        </div>
+                    {% endfor %}
+                </form>
+                {% comment %}  {% endcomment %}
+                <div class='md:tw-pl-4 tw-px-4 tw-mt-6'>
+                    <div class="tw-z-20 tw-mt-10 md:tw-mb-16 tw-mb-10">
+                        <button id='procced-for-payment' class='tw-rounded tw-block tw-w-full tw-mt-4 btn-success tw-font-semibold tw-text-2xl tw-text-center tw-py-3 tw-uppercase tw-text-white montserrat'>
+                            Continue Payment
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% comment %} PRICE DETAILS COLUMN {% endcomment %}
+            <div class='md:tw-order-1 tw-order-2 md:tw-col-span-1 tw-col-span-3 tw-border tw-border-gray-300 tw-mx-2 md:tw-border-0 md:tw-mx-0'>
+                <div class="md:tw-sticky md:tw-top-0">
+                    <h1 class="tw-flex tw-justify-start tw-items-center tw-pl-2 tw-capitalize tw-font-semibold montserrat tw-text-2xl tw-py-3">Price Details</h1>
+                    <div class="md:tw-border md:tw-border-gray-300 tw-shadow-md tw-rounded-md tw-px-2">
+                        <div class="tw-flex tw-items-center tw-justify-between tw-px-2 tw-my-2 tw-rounded tw-py-1.5">
+                            <p class="tw-text-lg tw-font-normal tw-text-gray-600">Price For <span class="tw-text-gray-700 tw-font-medium">({{numItems}} Items)</span></p>
+                            <p class="tw-text-lg tw-font-medium tw-text-gray-800">₹{{total_amt_crossed}}</p>
+                        </div>
+                        <div class="tw-flex tw-items-center tw-justify-between tw-px-2 tw-my-2 tw-py-1.5">
+                            <p class="tw-text-lg tw-font-normal tw-text-gray-600">Discount Amount</p>
+                            <p class="tw-text-lg tw-font-medium tw-text-gray-800">₹{{saved_amt}}</p>
+                        </div>
+                        <div class="tw-flex tw-items-center tw-justify-between tw-px-2 tw-my-2 tw-py-1.5">
+                            <p class="tw-text-lg tw-font-normal tw-text-gray-600">Delivery Charges</p>
+                            <p class="tw-text-lg tw-font-medium tw-text-green-500">Free</p>
+                        </div>
+                        <div class="tw-font-sans tw-flex tw-items-center tw-justify-between tw-px-2 tw-my-1 tw-py-3 tw-bg-gray-50 tw-border-t tw-border-b tw-border-gray-300">
+                            <p class="tw-text-xl tw-text-gray-800 tw-capitalize tw-font-medium">Final Amount</p>
+                            <p class="tw-text-xl tw-font-medium tw-text-gray-800">₹{{total_amt_customer}}</p>
+                            {% comment %} <span class="tw-text-green-500">({{saved_amt_percent}}% off)</span> {% endcomment %}
+                        </div>
+                        <div class="tw-flex tw-items-center tw-justify-start tw-px-2 tw-my-2 tw-py-1.5">
+                            <p class="tw-text-lg tw-font-normal tw-text-green-500 tw-capitalize">you will save {{saved_amt_percent}}% on This Order </p>
+                        </div>
+                    </div>
+                    <div class="py-3 tw-text-gray-500 tw-font-normal tw-bg-gray-50 tw-capitalize tw-flex tw-items-center tw-justify-around tw-p-2">
+                        <p class='tw-text-xl tw-flex-shrink tw-self-start tw-pt-2 tw-mr-2'><i class="fas fa-user-lock fa-lg"></i></p>
+                        <p class='tw-ml-2 tw-flex-grow'>100% Safe and Secure Payments<br>Payment Gatway Powered By <span class='text-primary tw-font-medium'>PayTM</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block js %}
+<script>
+document.getElementById('procced-for-payment').addEventListener('click',function(event){
+    window.location.search = '?for=proceed-for-payment'
+})
+</script>
+{% endblock %}

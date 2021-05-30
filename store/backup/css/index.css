@@ -1,0 +1,135 @@
+.topbar-image-container {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    object-fit: contain;
+    padding: 2px;
+}
+
+.topbar-image {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    transform: scale(1.3);
+}
+
+.montserrat {
+    font-family: 'Montserrat', 'sans-serif';
+}
+
+#top_main_tpbar::-webkit-scrollbar {
+    display: none;
+}
+
+.section_slide_1 {
+    width: 220px;
+    max-width: 220px;
+    padding: 6px;
+}
+
+.sectioncard {
+    width: 100%;
+    height: 100%;
+    max-height: 316px;
+}
+
+.section_product_img_container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+    width: 200px;
+    height: 200px;
+}
+
+.section_product_img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.brand_img_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+}
+
+.brand_img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.collection_container {
+    position: relative;
+    z-index: 1;
+}
+
+.collection_container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-image: url('../images/backgrounds/pencils.jpg');
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.main_page_section {
+    position: relative;
+    z-index: 1;
+}
+
+.main_page_section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: left center;
+    background-size: cover;
+    background-image: url('../images/backgrounds/flower_frame.jpg');
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.brand_slider_card {
+    position: relative;
+    z-index: 1;
+}
+
+@media only screen and (min-width: 1024px) {
+    .main_page_heart_btn {
+        transition-duration: 150ms;
+    }
+    .main_page_heart_btn:hover {
+        transform: scale(1.2);
+    }
+    .brand_slider_card {
+        position: relative;
+        z-index: 1;
+        transition-duration: 300ms;
+    }
+    .brand_slider_card:hover {
+        transform: scale(1.02);
+    }
+}
+
+@media only screen and (max-width: 768px) {}
+
+@media only screen and (max-width: 500px) {}

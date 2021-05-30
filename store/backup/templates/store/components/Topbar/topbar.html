@@ -1,0 +1,5 @@
+<div id='top_main_tpbar' class="tw-w-full tw-h-24 tw-flex tw-justify-between tw-items-center tw-flex-nowrap tw-box-border tw-overflow-x-auto tw-mt-2">
+    {% for topbar_image in topbar_images %}
+        {% include './card.html' with topbar_image=topbar_image %}
+    {% endfor %}
+</div>

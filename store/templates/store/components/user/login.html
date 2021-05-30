@@ -1,0 +1,39 @@
+{% extends '../../base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+    <link rel="stylesheet" href={% static 'store/css/user.css' %}>
+{% endblock %}
+
+{% block body %}
+
+{% include '../navbar/navbar.html' with shadow='True' %}
+{% include '../../messages.html' %}
+<div class="tw-grid tw-grid-cols-4 tw-m-5 tw-gap-4">
+    <div class="md:tw-col-span-2 tw-col-span-4 tw-grid tw-place-items-center">
+        <img src="{% static 'store/images/USER/signin-image.jpg' %}" alt="" class="tw-relative md:tw-bottom-8 md:tw-mt-0 tw-mt-6">
+    </div>
+    <div class="md:tw-col-span-2 tw-col-span-4 tw-py-4 tw-min-h-screen tw-grid tw-place-items-center">
+        <div class="tw-block tw-font-normal tw-text-gray-700 tw-w-full tw-relative md:tw-bottom-8">
+            <h1 class="md:tw-text-left tw-text-center tw-font-medium tw-text-2xl tw-text-indigo-500 montserrat tw-ml-2 tw-mb-6 tw-capitalize">Customer Login</h1>
+            <form method="post" class='md:tw-w-10/12 tw-p-3 tw-rounded-md tw-shadow-lg'>
+                {% csrf_token %}
+                {{form|crispy}}
+                <div class="tw-flex tw-items-center tw-mt-8">
+                    <button type="submit" class='tw-block tw-py-2 btn-success tw-text-white hover:tw-text-white tw-rounded tw-px-10 hover:tw-shadow-md'>SUBMIT</button>
+                    <a href="{% url 'register' %}" class='tw-inline-block tw-ml-6 tw-text-blue-500 md:tw-text-base tw-text-sm md:tw-text-left tw-text-center'>Create New Account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+
+{% block js %}
+    <script src="{% static 'store/js/user.js' %}"></script>
+{% endblock %}

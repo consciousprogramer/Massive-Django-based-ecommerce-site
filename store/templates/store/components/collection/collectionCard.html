@@ -1,0 +1,17 @@
+<a target='_blank' href="{% if product.0 == True %}{% url 'product_view' ptype='variable' p_id=product.3 v_id=product.2 %}{% else %}{% url 'product_view' ptype='normal' p_id=product.2 %}{% endif %}" class="tw-flex tw-flex-col tw-content-center tw-p-2 tw-bg-white tw-rounded-md hover:tw-shadow tw-border-gray-200 tw-border hover:tw-border-gray-300">
+    <div  class='tw-mx-auto tw-inline-block lg:tw-w-40 lg:tw-h-48 md:tw-w-36 md:tw-h-40 sm:tw-w-32 sm:tw-h-36 tw-w-28 tw-h-32 tw-mb-auto' target="_blank">
+        <img src={{product.1}} alt={{product.4}} class='tw-w-full tw-h-full tw-object-contain tw-grid tw-place-items-center'>
+    </div>
+    <div class="tw-flex tw-flex-col tw-mt-2">
+        <div>
+            <p class='tw-text-gray-700 hover:tw-text-blue-600 tw-p-0.5 tw-text-center tw-text-xs md:tw-text-sm lg:tw-text-base'>
+                {{product.4| truncatechars:45}}
+            </p>
+        </div>
+        <div class='tw-flex tw-justify-center tw-items-center'>
+            <p class="tw-font-medium tw-text-xl tw-text-center tw-mx-1 tw-inline-block tw-font-serif">₹{{product.5}}</p>
+            <p class="tw-line-through tw-ml-1 tw-text-sm tw-text-center tw-mx-1 tw-inline-block tw-text-gray-600">₹{{product.6}}</p>
+            <p class="tw-text-green-500 tw-font-normal tw-text-center tw-ml-1 tw-text-xs tw-bg-gray-100 tw-p-0.5 tw-self-center tw-rounded-lg">({{product.7}}% off)</p>
+        </div>
+    </div>
+</a>

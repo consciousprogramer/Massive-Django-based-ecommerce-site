@@ -1,0 +1,307 @@
+{% csrf_token %}
+{% if ptype == 'variable' %}
+<div class="tw-w-full tw-min-h-full md:tw-pl-3 tw-pl-0 md:tw-mt-0 tw-mt-6 tw-relative">
+    <div class="product_name tw-p-2 tw--mb-2">
+        <h1 class='tw-font-medium tw-text-2xl montserrat' id='product_name'>
+            {{variant.Name}}
+        </h1>
+    </div>
+    <div class="tw-flex tw-items-center tw-place-items-center">
+        {% if product.Nums_of_rating == 0 %}
+            <button class='btn btn-success btn-sm tw-rounded p-1 tw-mr-5 tw-w-14 shadow-none tw-border-none'>NEW!</button>
+            <h5 class="tw-text-gray-600 tw-font-medium montserrat tw-my-auto tw-mx-4">
+                No reviews,Be The First To Review!
+            </h5>
+        {% else %}
+            <div class="tw-bg-green-500 p-2 tw-text-white tw-font-normal tw-rounded tw-mr-2">
+                <p>
+                    {{product.Rating}}
+                </p>
+            </div>
+            <div class="tw-text-gray-500 tw-mr-3">
+                <p>
+                    {{product.Nums_of_rating}}
+                </p>
+            </div>
+        {% endif %}
+    </div>
+    <div class="tw-flex tw-items-center tw-ml-2 tw-my-2">
+        <h3 class='tw-font-medium tw-text-3xl tw-mr-4 tw-font-serif tw-my-auto'>
+            ₹{{variant.Cost_to_customer}}
+        </h3>
+        <h5 class="tw-font-normal tw-text-gray-500 tw-mr-4 tw-line-through tw-text tw-font-sans tw-my-auto">
+            ₹{{variant.Crossed_price}}
+        </h5>
+        <h5 class="tw-font-medium tw-text-green-500 mr-4 tw-text-sm tw-my-auto">
+            ( {{20}}% off )
+        </h5>
+    </div>
+    {% if 0 == 0 %}
+        <div class="tw-flex tw-items-center">
+            <h5 class='tw-text-green-500 tw-bg-green-100 hover:tw-bg-green-200 hover:tw-text-green-700 tw-rounded-md tw-p-2 tw-mt-4 tw-bg-opacity-50 tw-font-normal tw-text-sm tw-transition tw-cursor-pointer'>
+                Free Delivery For Order Over ₹500
+            </h5>
+        </div>
+    {% endif %}
+    <div class="tw-flex tw-mt-4 tw-p-0 md:tw-w-8/12 tw-w-11/12 tw-items-center">
+        <input type="number" maxlength='6' id="pincode" class="form-control tw-w-4/12 tw-my-auto" placeholder="Enter Your Pincode">
+        <div>
+            <a class="btn btn-success btn p-2 tw-rounded-r-lg tw-rounded-b-sm tw-rounded-l-none tw-rounded-t-none tw-my-auto">Check</a>
+        </div>
+    </div>
+    {% comment %} ATTRIBUTES {% endcomment %}
+        <div class="tw-w-full tw-my-2 tw-py-2 border attribute-container tw-rounded-lg tw-flex-nowrap tw-overflow-x-auto">
+            {% for key,value in attributes_detail.items %}
+                <div class="tw-flex tw-justify-start tw-items-center my-2 tw-flex-grow-0 tw-flex-shrink-0 attribute-row">
+                    <p class="tw-text-gray-600 tw-font-medium tw-mr-2 attribute-heading tw-capitalize tw-rounded-lg tw-text-right">{{ key }}</p>
+                    <div class="tw-flex tw-items-center tw-justify-around tw-mx-2">
+                        {% for attr_val in value %}
+                            {% if attr_val in variant_vals %}
+                                <a class="tw-inline-block tw-mx-2 tw-text-center current-attribute attribute-names tw-capitalize tw-flex-shrink-0">
+                                    {{ attr_val }}
+                                </a>
+                            {% else %}
+                                <a class="tw-inline-block tw-mx-2 tw-text-center attribute tw-bg-gray-100 attribute-names tw-capitalize hover:tw-bg-gray-200 tw-flex-shrink-0">
+                                    {{ attr_val }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class='tw-mt-5 tw-mb-4 tw-p-1 tw-flex tw-items-center tw-justify-start'>
+            <img src={{product.Brand.Brand_image.url}} class='tw-w-14 tw-h-14 tw-my-auto tw-flex-shrink tw-flex-grow-0' alt="">
+            <div class="tw-flex lg:tw-hidden tw-p-0 md:tw-w-10/12 tw-w-11/12 tw-items-center tw-ml-7 tw-my-auto">
+                <input type="number" id="pincode" class="form-control tw-w-4/12 tw-my-auto" placeholder="Enter Your Pincode">
+                <div>
+                    <a class="btn btn-success btn p-2 tw-rounded-r-lg tw-rounded-b-sm tw-rounded-l-none tw-rounded-t-none tw-my-auto">Check</a>
+                </div>
+            </div>
+            {% comment %} For LG screen {% endcomment %}
+            <div class="tw-pr-4 tw-mr-auto tw-ml-16 tw-hidden lg:tw-flex tw-flex-wrap tw-items-center" id='cart_row_lg'>
+                <div class="tw-inline-flex tw-w-16 tw-h-14 tw-flex-shrink tw-flex-grow-0 tw-justify-center tw-mr-6 tw-items-center">
+                    <input type="number" name="" min="1" id="product_quantity_lg" class='product_quantity tw-w-20 tw-h-14 tw-pl-2 tw-my-auto tw-font-medium tw-border tw-border-yellow-400 tw-text-lg tw-text-gray-700' value='1'>
+                    <div class="tw-inline-flex tw-flex-col tw-w-5">
+                        <div class="tw-flex-grow tw-flex-shrink-0 tw-border tw-border-yellow-400 tw-px-1 tw-text-yellow-600 hover:tw-bg-yellow-200 tw-h-7" id = 'increase_quantity_lg'><i class="fas fa-caret-up"></i></div>
+                        <div class="tw-flex-grow tw-flex-shrink-0 tw-border tw-border-yellow-400 tw-px-1 tw-text-yellow-600 hover:tw-bg-yellow-200 tw-h-7" id = 'decrease_quantity_lg'><i class="fas fa-caret-down"></i></div>
+                    </div>
+                </div>
+                <button {% if In_cart == True %}data-action='view_cart'{% else %}data-action='add'{% endif %}  data-action='add' class='cart_btn tw-hidden md:tw-inline btn tw-shadow-none orange lighten-1 tw-my-auto tw-font-semibold md:tw-text-sm lg:tw-text-lg tw-text-white montserrat hover:tw-text-white hover:tw-shadow-md tw-flex-shrink-0'>
+                    <i class="fab fa-opencart fa-lg"></i> {% if In_cart == True %}View Cart{% else %}Add To Cart{% endif %}
+                </button>
+                <button class='tw-hidden md:tw-inline btn tw-shadow-none btn-success tw-my-auto tw-font-semibold md:tw-text-sm lg:tw-text-lg tw-text-white montserrat hover:tw-text-white hover:tw-shadow-md tw-flex-shrink-0'>
+                    Buy
+                </button>
+            </div>
+        </div>
+        {% comment %} For MD Screeen {% endcomment %}
+        <div class="tw-pl-4 tw-flex lg:tw-hidden tw-flex-wrap tw-mb-6" id='cart_row_md'>
+            <div class="tw-inline-flex tw-w-12 tw-h-12 tw-flex-shrink tw-flex-grow-0 tw-justify-center tw-mr-6">
+                <input type="number" name="" min="1" id="product_quantity_md" class='product_quantity tw-w-12 tw-h-12 tw-my-auto tw-pl-5 tw-font-medium tw-border tw-border-yellow-400 tw-text-lg tw-text-gray-700' value='1'>
+                <div class="tw-inline-flex tw-flex-col tw-w-5">
+                    <div class="tw-flex-grow tw-flex-shrink-0 tw-border tw-border-yellow-400 tw-px-1 tw-text-yellow-600 hover:tw-bg-yellow-200 tw-h-6" id = 'increase_quantity_md'><i class="fas fa-caret-up"></i></div>
+                    <div class="tw-flex-grow tw-flex-shrink-0 tw-border tw-border-yellow-400 tw-px-1 tw-text-yellow-600 hover:tw-bg-yellow-200 tw-h-6" id = 'decrease_quantity_md'><i class="fas fa-caret-down"></i></div>
+                </div>
+            </div>
+            <button {% if In_cart == True %}data-action='view_cart'{% else %}data-action='add'{% endif %} class='cart_btn tw-hidden md:tw-inline btn tw-shadow-none orange lighten-1 tw-my-auto tw-font-semibold tw-text-white montserrat hover:tw-text-white hover:tw-shadow-md tw-flex-shrink-0'>
+                <i class="fab fa-opencart fa-lg"></i> {% if In_cart == True %}View Cart{% else %}Add To Cart{% endif %}
+            </button>
+            <button class='tw-hidden md:tw-inline btn tw-shadow-none btn-success tw-my-auto tw-font-semibold tw-text-white montserrat hover:tw-text-white hover:tw-shadow-md tw-flex-shrink-0'>
+                <i class="fab fa-react fa-pulse"></i> Buy
+            </button>
+        </div>
+
+
+    {% comment %} ATTRIBUTES {% endcomment %}
+    <div class="tw-flex tw-items-center tw-text-gray-600 tw-text-sm">
+        <p class='tw-p-1 tw-bg-gray-100 tw-rounded'>
+            Dilevery Charges ₹40 | 4-7 Days
+        </p>
+    </div>
+    {% comment %} Product Highlights {% endcomment %}
+    <div class="tw-py-2 tw-pl-4" id='highlightBox'>
+        <h6 class='tw-text-left montserrat tw-underline tw-font-medium'>Highlights:</h6>
+        <div class="">
+            {% for line in product.Highlights %}
+                <p class='tw-text-gray-600 tw-text-sm tw-pr-2 tw-rounded tw-text-left my-2'>
+                    <i class="fas fa-caret-right tw-text-gray-400 tw-mr-3"></i>{{line}}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id='descriptionBox'>
+        <p class='my-0 ml-2 tw-text-left montserrat tw-underline tw-font-medium'>
+            Description:
+        </p>
+        <p class="my-0 mt-2 tw-text-gray-600 px-2 tw-rounded tw-w-11/12 tw-text tw-font-light">
+            {{product.Description}}
+        </p>
+    </div>
+
+    <div id='detailsView' class='tw-mt-2'>
+        <p class='my-0 ml-2 tw-text-left montserrat tw-underline tw-font-medium'>
+            Product Details
+        </p>
+        {% for question,answer in product.Meta_data.items %}
+            <ul class='tw-flex tw-flex-col tw-items-center tw-w-10/12 tw-mr-auto tw-pl-2 tw-mt-2 tw-font-medium montserrat'>
+                <li class='tw-flex-grow tw-grid tw-grid-cols-3 tw-gap-x-1 tw-w-full'>
+                    <p class="tw-col-span-1 tw-text-left tw-text-gray-400">
+                        {{question}}
+                    </p>
+                    <p class="tw-col-span-2 tw-text-left tw-text-gray-600 tw-font-medium">
+                        : {{answer}}
+                    </p>
+                </li>
+            </ul>
+        {% endfor %}
+    </div>
+<div class="tw-flex tw-items-stretch tw-fixed tw-bottom-0 tw-left-0 tw-right-0 md:tw-hidden">
+    <div {% if In_cart == True %}data-action='view_cart'{% else %}data-action='add'{% endif %} class="cart_btn tw-flex-grow tw-flex-shrink-0 tw-text-center tw-py-3 tw-font-semibold tw-text-white orange lighten-1 tw-text-xl tw-uppercase">
+        <i class="fas fa-shopping-cart"></i>{% if In_cart == True %}View Cart{% else %}Add To Cart{% endif %}
+    </div>
+    <div class="tw-flex-grow tw-flex-shrink-0 tw-text-center tw-py-3 tw-font-semibold tw-text-white btn-success tw-text-xl tw-uppercase"><i class="fas fa-shipping-fast"></i> Buy Now</div>
+</div>
+</div>
+
+
+
+{% elif ptype == 'normal' %}
+<div class="tw-flex tw-items-stretch tw-fixed tw-bottom-0 tw-left-0 tw-right-0 md:tw-hidden">
+    <div class="tw-flex-grow tw-flex-shrink-0 tw-text-center tw-py-3 tw-font-semibold tw-text-white orange lighten-1 tw-text-xl tw-uppercase"><i class="fas fa-shopping-cart"></i> Add To Cart</div>
+    <div class="tw-flex-grow tw-flex-shrink-0 tw-text-center tw-py-3 tw-font-semibold tw-text-white btn-success tw-text-xl tw-uppercase"><i class="fas fa-shipping-fast"></i> Buy Now</div>
+</div>
+<div class="tw-w-full tw-min-h-full md:tw-pl-3 md:tw-mt-0 tw-mt-6 tw-relative">
+    <div class="product_name tw-p-2 tw--mb-2">
+        <h1 class='tw-font-medium tw-text-2xl montserrat' id='product_name'>
+            {{product.Name}}
+        </h1>
+    </div>
+    <div class="tw-flex tw-items-center tw-place-items-center">
+        {% if product.Nums_of_rating == 0 %}
+            <button class='btn btn-success btn-sm tw-rounded p-1 tw-mr-5 tw-w-14 shadow-none tw-border-none'>NEW!</button>
+            <h5 class="tw-text-gray-600 tw-font-medium montserrat tw-my-auto tw-mx-4">
+                No reviews,Be The First To Review!
+            </h5>
+        {% else %}
+            <div class="tw-bg-green-500 p-2 tw-text-white tw-font-normal tw-rounded tw-mr-2">
+                <p>
+                    {{product.Rating}}
+                </p>
+            </div>
+            <div class="tw-text-gray-500 tw-mr-3">
+                <p>
+                    {{product.Nums_of_rating}}
+                </p>
+            </div>
+        {% endif %}
+    </div>
+    <div class="tw-flex tw-items-center tw-ml-2 tw-my-2">
+        <h3 class='tw-font-medium tw-text-3xl tw-mr-4 tw-font-serif tw-my-auto'>
+            ₹{{product.Cost_to_customer}}
+        </h3>
+        <h5 class="tw-font-normal tw-text-gray-500 tw-mr-4 tw-line-through tw-text tw-font-sans tw-my-auto">
+            ₹{{product.Crossed_price}}
+        </h5>
+        <h5 class="tw-font-medium tw-text-green-500 mr-4 tw-text-sm tw-my-auto">
+            ( {{20}}% off )
+        </h5>
+    </div>
+    {% if 0 == 0 %}
+        <div class="tw-flex tw-items-center">
+            <h5 class='tw-text-green-500 tw-bg-green-100 hover:tw-bg-green-200 hover:tw-text-green-700 tw-rounded-md tw-p-2 tw-mt-4 tw-bg-opacity-50 tw-font-normal tw-text-sm tw-transition tw-cursor-pointer'>
+                Free Delivery For Order Over ₹500
+            </h5>
+        </div>
+    {% endif %}
+    <div class="tw-flex tw-mt-4 tw-p-0 md:tw-w-8/12 tw-w-11/12 tw-items-center">
+        <input type="number" maxlength='6' id="pincode" pattern="[0-9]{6}" class="form-control tw-w-6/12 tw-my-auto" placeholder="Enter Your Pincode">
+        <div>
+            <a class="btn btn-success btn p-2 tw-rounded-r-lg tw-rounded-b-sm tw-rounded-l-none tw-rounded-t-none tw-my-auto">Check</a>
+        </div>
+    </div>
+    <div class='tw-mt-5 tw-mb-4 tw-p-1 tw-flex tw-items-center tw-justify-start'>
+        <img src={{product.Brand.Brand_image.url}} class='tw-w-14 tw-h-14 tw-my-auto tw-flex-shrink tw-flex-grow-0' alt="">
+        {% comment %} For LG screen {% endcomment %}
+        <div class="tw-pr-4 tw-mr-auto tw-ml-16 tw-hidden lg:tw-flex tw-flex-wrap tw-items-center" id='cart_row_lg'>
+            <div class="tw-inline-flex tw-w-16 tw-h-14 tw-flex-shrink tw-flex-grow-0 tw-justify-center tw-mr-6 tw-items-center">
+                <input type="number" name="" min="1" id="product_quantity_lg" class='product_quantity tw-w-20 tw-h-14 tw-pl-2 tw-my-auto tw-font-medium tw-border tw-border-yellow-400 tw-text-lg tw-text-gray-700' value='1'>
+                <div class="tw-inline-flex tw-flex-col tw-w-5">
+                    <div class="tw-flex-grow tw-flex-shrink-0 tw-border tw-border-yellow-400 tw-px-1 tw-text-yellow-600 hover:tw-bg-yellow-200 tw-h-7" id = 'increase_quantity_lg'><i class="fas fa-caret-up"></i></div>
+                    <div class="tw-flex-grow tw-flex-shrink-0 tw-border tw-border-yellow-400 tw-px-1 tw-text-yellow-600 hover:tw-bg-yellow-200 tw-h-7" id = 'decrease_quantity_lg'><i class="fas fa-caret-down"></i></div>
+                </div>
+            </div>
+            <button data-action='add' class='cart_btn tw-hidden md:tw-inline btn tw-shadow-none orange lighten-1 tw-my-auto tw-font-semibold md:tw-text-sm lg:tw-text-lg tw-text-white montserrat hover:tw-text-white hover:tw-shadow-md tw-flex-shrink-0'>
+                <i class="fab fa-opencart fa-lg"></i> {% if In_cart == True %}View Cart{% else %}Add To Cart{% endif %}
+            </button>
+            <button class='tw-hidden md:tw-inline btn tw-shadow-none btn-success tw-my-auto tw-font-semibold md:tw-text-sm lg:tw-text-lg tw-text-white montserrat hover:tw-text-white hover:tw-shadow-md tw-flex-shrink-0'>
+                Buy
+            </button>
+        </div>
+    </div>
+    {% comment %} For MD Screeen {% endcomment %}
+    <div class="tw-pl-4 tw-flex lg:tw-hidden tw-flex-wrap tw-mb-6" id='cart_row_md'>
+        <div class="tw-inline-flex tw-w-12 tw-h-12 tw-flex-shrink tw-flex-grow-0 tw-justify-center tw-mr-6">
+            <input type="number" name="" min="1" id="product_quantity_md" class='product_quantity tw-w-12 tw-h-12 tw-my-auto tw-pl-5 tw-font-medium tw-border tw-border-yellow-400 tw-text-lg tw-text-gray-700' value='1'>
+            <div class="tw-inline-flex tw-flex-col tw-w-5">
+                <div class="tw-flex-grow tw-flex-shrink-0 tw-border tw-border-yellow-400 tw-px-1 tw-text-yellow-600 hover:tw-bg-yellow-200 tw-h-6" id = 'increase_quantity_md'><i class="fas fa-caret-up"></i></div>
+                <div class="tw-flex-grow tw-flex-shrink-0 tw-border tw-border-yellow-400 tw-px-1 tw-text-yellow-600 hover:tw-bg-yellow-200 tw-h-6" id = 'decrease_quantity_md'><i class="fas fa-caret-down"></i></div>
+            </div>
+        </div>
+        <button data-action='add' class='cart_btn tw-hidden md:tw-inline btn tw-shadow-none orange lighten-1 tw-my-auto tw-font-semibold tw-text-white montserrat hover:tw-text-white hover:tw-shadow-md tw-flex-shrink-0'>
+            <i class="fab fa-opencart fa-lg"></i> {% if In_cart == True %}View Cart{% else %}Add To Cart{% endif %}
+        </button>
+        <button class='tw-hidden md:tw-inline btn tw-shadow-none btn-success tw-my-auto tw-font-semibold tw-text-white montserrat hover:tw-text-white hover:tw-shadow-md tw-flex-shrink-0'>
+            <i class="fab fa-react fa-pulse"></i> Buy
+        </button>
+    </div>
+        
+    <hr class='my-2 tw-font-medium tw-text-gray-400 md:tw-w-8/12 tw-w-11/12'>
+    <div class="tw-flex tw-items-center tw-text-gray-600 tw-text-sm">
+        <p class='tw-p-1 tw-bg-gray-100 tw-rounded'>
+            Dilevery Charges ₹40 | 4-7 Days
+        </p>
+    </div>
+    {% comment %} Product Highlights {% endcomment %}
+    <div class="tw-py-2 tw-pl-4" id='highlightBox'>
+        <h6 class='tw-text-left montserrat tw-underline tw-font-medium'>Highlights:</h6>
+        <div class="">
+            {% for line in product.Highlights %}
+                <p class='tw-text-gray-600 tw-text-sm tw-pr-2 tw-rounded tw-text-left my-2'>
+                    <i class="fas fa-caret-right tw-text-gray-400 tw-mr-3"></i>{{line}}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id='descriptionBox'>
+        <p class='my-0 ml-2 tw-text-left montserrat tw-underline tw-font-medium'>
+            Description:
+        </p>
+        <p class="my-0 mt-2 tw-text-gray-600 px-2 tw-rounded tw-w-11/12 tw-text tw-font-light">
+            {{product.Description}}
+        </p>
+    </div>
+
+    <div id='detailsView' class='tw-mt-2'>
+        <p class='my-0 ml-2 tw-text-left montserrat tw-underline tw-font-medium'>
+            Product Details
+        </p>
+        {% for question,answer in product.Meta_data.items %}
+            <ul class='tw-flex tw-flex-col tw-items-center tw-w-10/12 tw-mr-auto tw-pl-2 tw-mt-2 tw-font-medium montserrat'>
+                <li class='tw-flex-grow tw-grid tw-grid-cols-3 tw-gap-x-1 tw-w-full'>
+                    <p class="tw-col-span-1 tw-text-left tw-text-gray-400">
+                        {{question}}
+                    </p>
+                    <p class="tw-col-span-2 tw-text-left tw-text-gray-600 tw-font-medium">
+                        : {{answer}}
+                    </p>
+                </li>
+            </ul>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endif  %}

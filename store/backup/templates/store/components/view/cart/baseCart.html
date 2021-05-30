@@ -1,0 +1,142 @@
+{% extends '../../../base.html' %}
+{% load static %}
+
+{% block css %}
+
+{% if not request.user.is_authenticated %}
+<script>
+    console.log('starting cart script')
+    debugger
+    if(cart.cartItems.length !== 0){
+        if(window.location.search.length === 0){
+            let varQueryStr = ''
+            let prodQueryStr = ''
+            cart.cartItems.forEach((obj) => {
+                if (obj.variantId === null) {
+                    if (prodQueryStr.length === 0) {
+                        prodQueryStr = `${obj.productId}_${obj.quantity}`
+                    } else {
+                        prodQueryStr = `${obj.productId}_${obj.quantity}-${prodQueryStr}`
+                    }
+                } else {
+                    if (varQueryStr.length === 0) {
+                        varQueryStr = `${obj.variantId}_${obj.quantity}`
+                    } else {
+                        varQueryStr = `${obj.variantId}_${obj.quantity}-${varQueryStr}`
+                    }
+                }
+            })
+            if (varQueryStr.length === 0 && prodQueryStr.length === 0) {
+                finalStr = ''
+            } else if (varQueryStr.length === 0 && prodQueryStr.length !== 0) {
+                finalStr = `?prodlist=${prodQueryStr}`
+            } else if (varQueryStr.length !== 0 && prodQueryStr.length === 0) {
+                finalStr = `?varlist=${varQueryStr}`
+            } else {
+                finalStr = `?varlist=${varQueryStr}&prodlist=${prodQueryStr}`
+            }
+            console.log(finalStr);
+            window.location.href = `${window.origin}${cartPageUrl}${finalStr}`
+        }
+    }
+</script>
+{% endif %}
+
+<link rel="stylesheet" href={% static 'store/css/cart.css' %}>
+{% endblock css %}
+
+
+
+
+{% block body %}
+    {% include '../../navbar/navbar.html' %}
+    {% include '../../../messages.html' %}
+    {% csrf_token %}
+    <div class='tw-block tw-my-4 md:tw-mx-10 tw-border-gray-200 tw-border'>
+        <div class="tw-grid tw-grid-cols-3 md:tw-gap-x-6 tw-gap-y-4 tw-gap-x-4">
+            <div class='md:tw-col-span-2 tw-col-span-3'>
+                <h1 class="tw-flex tw-justify-start tw-items-center tw-pl-2 tw-capitalize tw-font-medium md:tw-font-semibold montserrat tw-text-2xl tw-py-3">Items In Cart ({{numItems}} Items)</h1>
+                {% if request.user.is_authenticated %}
+                    {% for Item in allItems %}
+                        {% include './cartItem.html' with Item=Item counter=forloop.counter0%}
+                    {% empty %}
+                        <div class="tw-text-left tw-py-4 tw-text-red-400 tw-font-medium tw-text-xl tw-capitalize tw-pl-2 tw-font-mono">
+                            Currently No Items In Your Cart
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% for Item in allItems %}
+                        {% include './un_authCartItem.html' with Item=Item counter=forloop.counter0%}
+                    {% empty %}
+                        <div class="tw-text-left tw-py-4 tw-text-red-400 tw-font-medium tw-text-xl tw-capitalize tw-pl-2 tw-font-mono">
+                            Currently No Items In Your Cart
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="tw-mx-2 tw-sticky tw-bottom-0 tw-z-20">
+                {% if request.user.is_authenticated %}
+                    <a href={% url 'orderpage' %} class='md:tw-hidden tw-block tw-w-full tw-mt-4 btn-success tw-font-semibold tw-text-2xl tw-text-center tw-py-3 tw-uppercase tw-text-white'>
+                            place order
+                    </a>
+                {% else %}
+                    <a href="{% url 'register' %}?in_transition=1" class='md:tw-hidden tw-block tw-w-full tw-mt-4 btn-success tw-font-semibold tw-text-lg tw-text-center tw-py-3 tw-uppercase tw-text-white'>
+                            Login To Continue
+                    </a>
+                {% endif %}
+                </div>
+            </div>
+            {% comment %} PRICE DETAILS COLUMN {% endcomment %}
+            <div class='md:tw-col-span-1 tw-col-span-3 tw-border tw-border-gray-300 tw-mx-2 md:tw-border-0 md:tw-mx-0'>
+                <div class="md:tw-sticky md:tw-top-0">
+                    <h1 class="tw-flex tw-justify-start tw-items-center tw-pl-2 tw-capitalize tw-font-semibold montserrat tw-text-2xl tw-py-3">Price Details</h1>
+                    <div class="md:tw-border md:tw-border-gray-300 tw-shadow-md">
+                        <div class="tw-flex tw-items-center tw-justify-between tw-px-2 tw-my-2 tw-rounded tw-py-1.5">
+                            <p class="tw-text-lg tw-font-normal tw-text-gray-600">Price For <span class="tw-text-gray-700 tw-font-medium">({{numItems}} Items)</span></p>
+                            <p class="tw-text-lg tw-font-medium tw-text-gray-800">₹{{total_amt_crossed}}</p>
+                        </div>
+                        <div class="tw-flex tw-items-center tw-justify-between tw-px-2 tw-my-2 tw-py-1.5">
+                            <p class="tw-text-lg tw-font-normal tw-text-gray-600">Discount Amount</p>
+                            <p class="tw-text-lg tw-font-medium tw-text-gray-800">₹{{saved_amt}}</p>
+                        </div>
+                        <div class="tw-flex tw-items-center tw-justify-between tw-px-2 tw-my-2 tw-py-1.5">
+                            <p class="tw-text-lg tw-font-normal tw-text-gray-600">Delivery Charges</p>
+                            <p class="tw-text-lg tw-font-medium tw-text-green-500">Free</p>
+                        </div>
+                        <div class="tw-font-sans tw-flex tw-items-center tw-justify-between tw-px-2 tw-my-1 tw-py-3 tw-bg-gray-50 tw-border-t tw-border-b tw-border-gray-300">
+                            <p class="tw-text-xl tw-text-gray-800 tw-capitalize tw-font-medium">Final Amount</p>
+                            <p class="tw-text-xl tw-font-medium tw-text-gray-800">₹{{total_amt_customer}}</p>
+                            {% comment %} <span class="tw-text-green-500">({{saved_amt_percent}}% off)</span> {% endcomment %}
+                        </div>
+                        <div class="tw-flex tw-items-center tw-justify-start tw-px-2 tw-my-2 tw-py-1.5">
+                            <p class="tw-text-lg tw-font-normal tw-text-green-500 tw-capitalize">you will save {{saved_amt_percent}}% on This Order </p>
+                        </div>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                        <a href={% url 'orderpage' %} class='order-btn tw-hidden md:tw-inline-block tw-sticky tw-bottom-0 tw-mt-4 btn-success tw-font-semibold tw-text-2xl tw-text-center tw-w-full tw-py-3 tw-uppercase tw-text-white tw-shadow hover:tw-shadow-lg'>
+                            place order
+                        </a>
+                    {% else %}
+                        <a href="{% url 'register' %}?in_transition=1" class='order-btn tw-hidden md:tw-inline-block tw-sticky tw-bottom-0 tw-mt-4 btn-success tw-font-semibold tw-text-lg tw-text-center tw-w-full tw-py-3 tw-uppercase tw-text-white tw-shadow hover:tw-shadow-lg'>
+                            Login To Continue
+                        </a>
+                    {% endif %}
+                    <div class="py-3 tw-text-gray-500 tw-font-normal tw-bg-gray-50 tw-capitalize tw-flex tw-items-center tw-justify-around tw-p-2">
+                        <p class='tw-text-xl tw-flex-shrink tw-self-start tw-pt-2 tw-mr-2'><i class="fas fa-user-lock fa-lg"></i></p>
+                        <p class='tw-ml-2 tw-flex-grow'>100% Safe and Secure Payments<br>Payment Gatway Powered By <span class='text-primary tw-font-medium'>PayTM</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock body %}
+
+
+
+
+{% block js %}
+<script src={% static 'store/js/cartPage.js' %}></script>
+{% endblock js %}
+

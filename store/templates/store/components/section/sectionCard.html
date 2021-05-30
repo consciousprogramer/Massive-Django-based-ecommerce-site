@@ -1,0 +1,14 @@
+<div class="tw-flex tw-flex-col tw-items-center tw-flex-shrink-0 sectioncard tw-mx-auto tw-bg-white tw-p-2 tw-rounded-md tw-shadow tw-border tw-border-white hover:tw-border-gray-300">
+    <div class='section_product_img_container tw-px-3'>
+        <img src={{item.1}} class='section_product_img' alt="">
+        <div class=' tw-bg-red-100 tw-text-red-300 hover:tw-text-red-500 tw-flex tw-p-1 tw-rounded-sm tw-shadow-xl tw-absolute md:tw-top-1 md:tw-right-1 tw-top-2 tw-right-2 tw-z-10 main_page_heart_btn'>
+            <i class="fas fa-heart tw-z-0"></i>
+        </div>
+    </div>
+    <p class='tw-text-gray-800 md:tw-text-base tw-text-sm tw-mx-2 tw-mb-auto tw-text-center'>{{item.4|truncatechars:"35"}}</p>
+    <div class='tw-flex-shrink-0 tw-flex tw-items-center tw-justify-center tw-mt-auto lg:tw-bg-green-100 tw-bg-green-50 tw-rounded tw-px-2'>
+        <p class='tw-text-lg tw-text-green-500 tw-mr-2 tw-my-auto'>₹{{item.5}}</p>
+        <p class='tw-text-sm tw-text-gray-500 tw-my-auto tw-line-through tw-mr-2'>₹{{item.6}}</p>
+        <p class='tw-text-green-500 tw-text-sm tw-my-auto'>({{item.7}}% off)</p>
+    </div>
+</div>

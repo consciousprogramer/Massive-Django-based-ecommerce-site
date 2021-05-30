@@ -1,0 +1,1 @@
+default_app_config = 'Ecom_fork1.ecom.store.apps.StoreConfig'

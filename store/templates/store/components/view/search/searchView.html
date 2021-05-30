@@ -1,0 +1,79 @@
+{% extends '../../../base.html' %}
+{% load static %}
+
+{% block title %}
+    Search Product
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href={% static 'store/css/searchView.css' %}>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+{% include '../../navbar/navbar.html' %}
+{% include '../../../messages.html' %}
+
+{% comment %} HORIZONTAL TOP STRIP {% endcomment %}
+<div class="tw-flex tw-items-center tw-justify-between tw-px-3 tw-py-2 tw-border-gray-400 tw-border tw-mt-2 mx-2">
+    <div class="listview-options tw-flex-grow-0 tw-flex-shrink-0">
+        <a href="" class='tw-hidden md:tw-inline'>
+            <i class="fas fa-th tw-inline-block tw-mx-2 fa-lg"></i>
+        </a>
+        <a href="" class='tw-hidden md:tw-inline'>
+            <i class="fas fa-align-justify tw-inline-block tw-mx-2 fa-lg"></i>
+        </a>
+        <a href="" class='tw-inline-block tw-mx-2'>
+            <i class="fas fa-sort-amount-down-alt fa-lg"></i> Filter
+        </a>
+    </div>
+
+    <div class="conviniance-options tw-flex-grow-0 tw-flex-shrink-0 tw-ml-auto">
+        <select name="items_per_page" id="perPageFilter" class='tw-bg-gray-100 tw-px-3 tw-py-0.5'>
+            <option value="12">12 Items Per Page</option>
+            <option value="16">16 Items Per Page</option>
+            <option value="20">20 Items Per Page</option>
+            <option value="30">30 Items Per Page</option>
+            <option value="46">46 Items Per Page</option>
+        </select>
+    </div>
+</div>
+
+{% comment %} ----MAIN SEARCH RESULTS---- {% endcomment %}
+{% include './searchResults.html' with msg=msg product_data=product_data result_for=result_for %}
+
+{% comment %} PAGIANTION {% endcomment %}
+<div class="tw-flex tw-justify-center tw-items-center tw-py-4">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pg-amber montserrat tw-items-center">
+            {% if product_data.has_previous %}
+                <li class="page-item tw-font-semibold">
+                    <a class="btn btn-outline-orange  btn-sm px-2 py-1" href="?page={{product_data.previous_page_number}}&productquery={{productquery}}"><i class="fas fa-angle-double-left fa-lg"></i> Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="btn btn-outline-orange  btn-sm tw-text-gray-400 disabled px-2 py-1"><i class="fas fa-angle-double-left fa-lg"></i> Previous</a>
+                </li>
+            {% endif %}
+            <li class="page-item tw-font-semibold tw-my-auto"><a class="btn btn-orange btn-sm px-3 py-1 tw-h-7 tw-inline-flex tw-justify-center tw-items-center tw-text-lg" href="?page={{product_data.number}}&productquery={{productquery}}"> {{product_data.number | default:"1"}} </a></li>
+            {% if product_data.has_next %}
+                <li class="page-item tw-font-semibold">
+                    <a class="btn btn-outline-orange  btn-sm px-2 py-1" href="?page={{product_data.next_page_number}}&productquery={{productquery}}">Next <i class="fas fa-angle-double-right fa-lg"></i></a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="btn btn-outline-orange btn-sm tw-text-gray-400 disabled px-2 py-1">Next <i class="fas fa-angle-double-right fa-lg"></i></a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+{% endblock body %}
+
+
+{% block js %}
+    <script src={% static 'store/js/searchView.js' %} ></script>
+{% endblock %}
