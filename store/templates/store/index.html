@@ -8,7 +8,7 @@
 
 {% block body %}
 
-    {% include './components/navbar/navbar.html' %}
+    {% include './components/navbar/navbar.html' with nos_of_products="0" %}
     {{topbar}}
     {{slider}}
 
@@ -30,7 +30,7 @@
     <div class='tw-mx-4 tw-py-6 tw-my-16'>
         <h1 class="tw-font-medium tw-text-center tw-text-2xl tw-text-gray-700 text-capitalize tw-my-3 montserrat">For Bulk Purchase/Order or Other query, Please feel free to contact us </h1>
         <div class="tw-text-center tw-py-4 tw-text-white hover:tw-text-white tw-mt-4">
-            <a type="submit" href="{% url 'contact' %}" class='tw-py-3 tw-px-5 tw-bg-yellow-400 tw-text-white hover:tw-text-white tw-font-semibold tw-uppercase tw-rounded tw-shadow hover:tw-bg-yellow-500 tw-transition-colors'> submit </a>
+            <a type="submit" href="{% url 'contact' %}" class='tw-py-3 tw-px-5 tw-bg-yellow-400 tw-text-white hover:tw-text-white tw-font-semibold tw-uppercase tw-rounded tw-shadow hover:tw-bg-yellow-500 tw-transition-colors'> Contact </a>
         </div>
     </div>
     

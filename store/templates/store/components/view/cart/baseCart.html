@@ -49,7 +49,7 @@
 
 
 {% block body %}
-    {% include '../../navbar/navbar.html' %}
+    {% include '../../navbar/navbar.html' with nos_of_products=numItems %}
     {% include '../../../messages.html' %}
     {% csrf_token %}
     <div class='tw-block tw-my-4 md:tw-mx-10 tw-border-gray-200 tw-border'>

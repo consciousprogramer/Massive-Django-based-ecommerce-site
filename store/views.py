@@ -920,7 +920,10 @@ def handle_register(request):
             new_user.refresh_from_db()
             new_user.Customer.PhoneNumber = formData.cleaned_data.get(
                 'PhoneNumber')
-            new_user.save()
+            try:
+                new_user.save()
+            except:
+                return render(request, 'store/components/user/register.html', {'form': formData})
             raw_pass = formData.clean_password2()
             from django.contrib.auth import login, authenticate
             user = authenticate(
@@ -948,6 +951,7 @@ def handle_register(request):
             messages.info(
                 request, 'Please register to place order, if already registerd <a href="/handle_login/" class="tw-text-blue-500 tw-font-medium tw-underline">CLICK HERE</a>')
             return render(request, 'store/components/user/register.html', {'form': CustomUserCreationForm()})
+        return render(request, 'store/components/user/register.html', {'form': CustomUserCreationForm()})
 
 
 def handle_cart_convert(request):
