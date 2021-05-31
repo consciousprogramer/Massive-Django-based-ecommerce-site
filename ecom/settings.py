@@ -27,7 +27,10 @@ with open(os.path.join(BASE_DIR, "secret.json")) as f:
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = secret["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if secret['ENV'] == "dev":
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 

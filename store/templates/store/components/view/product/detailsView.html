@@ -169,8 +169,8 @@
 
 {% elif ptype == 'normal' %}
 <div class="tw-flex tw-items-stretch tw-fixed tw-bottom-0 tw-left-0 tw-right-0 md:tw-hidden tw-z-50">
-    <div class="tw-flex-grow tw-flex-shrink-0 tw-text-center tw-py-3 tw-font-semibold tw-text-white orange lighten-1 tw-text-xl tw-uppercase tw-z-50"><i class="fas fa-shopping-cart tw-z-50"></i> Add To Cart</div>
-    <div class="tw-flex-grow tw-flex-shrink-0 tw-text-center tw-py-3 tw-font-semibold tw-text-white btn-success tw-text-xl tw-uppercase tw-z-50"><i class="fas fa-shipping-fast tw-z-50"></i> Buy Now</div>
+    <div data-action='add' class="cart_btn tw-flex-grow tw-flex-shrink-0 tw-text-center tw-py-3 tw-font-semibold tw-text-white orange lighten-1 tw-text-xl tw-uppercase tw-z-50"><i class="fab fa-opencart fa-lg"></i> {% if In_cart == True %}View Cart{% else %}Add To Cart{% endif %}</div>
+    <div class="cart_btn tw-flex-grow tw-flex-shrink-0 tw-text-center tw-py-3 tw-font-semibold tw-text-white btn-success tw-text-xl tw-uppercase tw-z-50"><i class="fas fa-shipping-fast tw-z-50"></i> Buy Now</div>
 </div>
 <div class="tw-w-full tw-min-h-full md:tw-pl-3 md:tw-mt-0 tw-mt-6 tw-relative">
     <div class="product_name tw-p-2 tw--mb-2">
