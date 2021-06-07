@@ -18,16 +18,13 @@ from json import load
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-with open(os.path.join(BASE_DIR, "secret.json")) as f:
-    secret = load(f)
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = secret["SECRET_KEY"]
+SECRET_KEY = os.environ.get("DJANGO_ECOM_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-if secret['ENV'] == "dev":
+if os.environ.get("DJANGO_ECOM_ENV") == "dev":
     DEBUG = True
 else:
     DEBUG = False
@@ -93,10 +90,11 @@ AUTH_USER_MODEL = 'store.User'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': secret['DB'],  # previous was ->'postgres',->'ecom2'
-        'USER': secret['USER'],
-        'PASSWORD': secret['PASSWORD'],
-        'HOST': secret['HOST'],
+        # previous was ->'postgres',->'ecom2'
+        'NAME': os.environ.get("DJANGO_ECOM_DB_NAME"),
+        'USER': os.environ.get("DJANGO_ECOM_DB_USER"),
+        'PASSWORD': os.environ.get("DJANGO_ECOM_DB_PASSWORD"),
+        'HOST': os.environ.get("DJANGO_ECOM_HOST"),
         'PORT': '5432',
     }
 }
@@ -156,8 +154,8 @@ LOGIN_URL = '/handle_login/'
 PAYTM_COMPANY_NAME = "MEERA STORE"   # For representation purposes
 PAYTM_INDUSTRY_TYPE_ID = "Retail"     # For staging environment
 PAYTM_CHANNEL_ID = "WEB"
-PAYTM_MERCHANT_KEY = secret["PAYTM_MERCHANT_KEY"]
-PAYTM_MERCHANT_ID = secret["PAYTM_MERCHANT_ID"]
+PAYTM_MERCHANT_KEY = os.environ.get("DJANGO_ECOM_PAYTM_MERCHANT_KEY")
+PAYTM_MERCHANT_ID = os.environ.get("DJANGO_ECOM_PAYTM_MERCHANT_ID")
 PAYTM_CALLBACK_URL = "http://localhost:8000/response/"  # Hardcode
 PAYTM_WEBSITE = "WEBSTAGING"
 PAYTM_PAYMENT_GATEWAY_URL = "https://securegw-stage.paytm.in/order/process"
