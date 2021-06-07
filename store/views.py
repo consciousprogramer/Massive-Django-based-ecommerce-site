@@ -12,7 +12,6 @@ from json import loads, dumps
 from .forms import ShippingAddressForm, RegisterForm, LoginForm, CustomUserCreationForm, ContactForm
 from django.conf import settings
 from Paytm import Checksum
-# Create your views here.
 
 
 def index(request):
