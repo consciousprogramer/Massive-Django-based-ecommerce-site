@@ -13,3 +13,5 @@ venv/
 secret.js
 /assets
 assets/
+/staticfiles
+staticfiles/

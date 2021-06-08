@@ -45,7 +45,7 @@ def index(request):
             'rowName': [row.pk, row.Name],
             'rowItems': row.Variants.all().values_list('Is_variant', 'Thumb_path', 'id', 'Product_id', 'Name', 'Cost_to_customer', 'Crossed_price', 'Discount').union(row.Products.all().values_list('Is_variant', 'Thumb_path', 'id', 'Brand_id', 'Name', 'Cost_to_customer', 'Crossed_price', 'Discount')),
         }
-        n = 5
+        n = 3
         for i in range(n):
             att.append(a)
     banner = Banner.objects.filter(Active=True).first()

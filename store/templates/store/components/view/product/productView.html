@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 <link rel="stylesheet" href={% static 'store/splide/dist/css/splide.min.css' %}>
 <link rel="stylesheet" href={% static 'store/lightgallery/dist/css/lightgallery.min.css' %}>
-<link rel="stylesheet" href={% static 'store/css/productView.css' %}>
+<link rel="stylesheet" href={% static 'store/prod/css/productView.css' %}>
 {% comment %} <link rel="stylesheet" href={% static 'store/Magnifier/magnifier.css' %}> {% endcomment %}
 {% endblock css %}
 
@@ -73,7 +73,7 @@
 {% endblock body %}
 
 {% block js %}
-    <script src={% static 'store/js/cartHandler.js' %}></script>
+    <script src={% static 'store/prod/js/cartHandler.js' %}></script>
     <script src= {% static 'store/splide/dist/js/splide.min.js' %}></script>
     <script src={% static 'store/lightgallery/dist/js/lightgallery.min.js' %}></script>
     <script src={% static 'store/lightgallery/demo/js/lg-zoom.min.js' %}></script>
@@ -83,5 +83,5 @@
     {% comment %} <script src={% static 'store/Magnifier/Magnifier.js' %}></script> {% endcomment %}
     {% comment %} <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.17/src/jquery.ez-plus.js"></script> {% endcomment %}
     <script src={% static 'store/zoom/jquery.zoom.js' %}></script>
-    <script src={% static 'store/js/productView.js' %}></script>
+    <script src={% static 'store/prod/js/productView.js' %}></script>
 {% endblock js %}

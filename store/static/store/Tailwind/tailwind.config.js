@@ -1,9 +1,4 @@
 module.exports = {
-  purge: [
-    "../../../templates/**/*.html",
-    "../../../templates/store/**/*.html",
-    "../../../../**/*.html"
-  ],
   prefix: "tw-",
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -18,7 +13,4 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [
-    require("@fullhuman/postcss-purgecss")
-  ],
 }

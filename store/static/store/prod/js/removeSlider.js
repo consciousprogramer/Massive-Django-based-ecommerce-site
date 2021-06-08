@@ -1,0 +1,1 @@
+.9<=outerWidth/outerHeight?(document.querySelectorAll(".slides_mob").forEach(e=>{e.remove()}),document.querySelectorAll(".Indicator_mob").forEach(e=>{e.remove()})):(document.querySelectorAll(".slides_pc").forEach(e=>{e.remove()}),document.querySelectorAll(".Indicator_mob").forEach(e=>{e.remove()}));

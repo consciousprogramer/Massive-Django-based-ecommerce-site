@@ -20,9 +20,9 @@ class TopbarAdmin(admin.ModelAdmin):
     ]
 
     class Media:
-        js = ('store/js/imagePreview.js',)
+        js = ('store/prod/js/imagePreview.js',)
         css = {
-            'all': ('store/css/imagePreview.css',)
+            'all': ('store/prod/css/imagePreview.css',)
         }
 
 
@@ -56,9 +56,9 @@ class Product_typeAdmin(admin.ModelAdmin):
     ordering = ['Name']
 
     class Media:
-        js = ('store/js/jsonGUI.js',)
+        js = ('store/prod/js/jsonGUI.js',)
         css = {
-            'all': ('store/css/jsonGUI.css',)
+            'all': ('store/prod/css/jsonGUI.css',)
         }
 
 
@@ -74,9 +74,9 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['Name', 'id']
 
     class Media:
-        js = ('store/js/jsonGUI.js',)
+        js = ('store/prod/js/jsonGUI.js',)
         css = {
-            'all': ('store/css/jsonGUI.css',)
+            'all': ('store/prod/css/jsonGUI.css',)
         }
 
 
@@ -140,9 +140,9 @@ class ProductWithVariantAdmin(nested_admin.NestedModelAdmin):
     list_editable = ('Is_active',)
 
     class Media:
-        js = ('store/js/jsonGUI.js',)
+        js = ('store/prod/js/jsonGUI.js',)
         css = {
-            'all': ('store/css/jsonGUI.css',)
+            'all': ('store/prod/css/jsonGUI.css',)
         }
 
 

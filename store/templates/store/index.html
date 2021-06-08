@@ -3,7 +3,7 @@
 
 {% block css %}
     <link rel="stylesheet" href={% static 'store/splide/dist/css/splide.min.css' %}>
-    <link rel="stylesheet" href={% static 'store/css/index.css' %}>
+    <link rel="stylesheet" href={% static 'store/prod/css/index.css' %}>
 {% endblock %}
 
 {% block body %}
@@ -40,10 +40,10 @@
 
 
 {% block beforejs %}
-    <script src={% static 'store/js/removeSlider.js' %}></script>
+    <script src={% static 'store/prod/js/removeSlider.js' %}></script>
 {% endblock %}
 
 {% block js %}
     <script src= {% static 'store/splide/dist/js/splide.min.js' %}></script>
-    <script src= {% static 'store/js/index.js' %}></script>
+    <script src= {% static 'store/prod/js/index.js' %}></script>
 {% endblock %}

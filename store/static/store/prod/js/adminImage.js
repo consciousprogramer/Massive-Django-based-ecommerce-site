@@ -1,0 +1,1 @@
+window.location.pathname.split(",").filter(i=>""!=i).includes("change");
